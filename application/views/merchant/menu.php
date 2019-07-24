@@ -1,50 +1,25 @@
-<li class="nav-item <?php if($view_name=='webconf' || $view_name=='category'){echo 'active';} ?>">
-  <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
-    <i class="fas fa-home"></i>
-    <p>Konfigurasi</p>
-    <span class="caret"></span>
-  </a>
-  <div class="collapse" id="dashboard">
-    <ul class="nav nav-collapse">
-      <li>
-        <a href="<?php echo base_url('webconf'); ?>">
-          <span class="sub-item">Konfigurasi Web</span>
-        </a>
-      </li>
-      <li>
-        <a href="<?php echo base_url('category'); ?>">
-          <span class="sub-item">Kategori</span>
-        </a>
-      </li>
-
-    </ul>
-  </div>
+<li class="nav-item <?php if($view_name=='dashboard'){echo 'active';} ?>">
+  <li class="nav-item <?php if($view_name=='dashboard'){echo 'active';} ?>">
+    <a href="<?php echo base_url('dashboard'); ?>">
+      <i class="fas fa-home"></i>
+      <p>Dasbor</p>
+    </a>
+  </li>
 </li>
-<li class="nav-section">
-  <span class="sidebar-mini-icon">
-    <i class="fa fa-ellipsis-h"></i>
-  </span>
-  <h4 class="text-section">Components</h4>
+<li class="nav-item <?php if($view_name=='shopPage'){echo 'active';} ?>">
+  <li class="nav-item <?php if($view_name=='shopPage'){echo 'active';} ?>">
+    <a href="<?php echo base_url('shopPage'); ?>">
+      <i class="fas fa-shopping-cart"></i>
+      <p>Halaman Belanja</p>
+    </a>
+  </li>
 </li>
 
-<li class="nav-item <?php if($view_name=='promo'){echo 'active';} ?>">
-  <a href="<?php echo base_url('promo'); ?>">
-    <i class="far fa-credit-card"></i>
-    <p>Promo</p>
-  </a>
-</li>
-
-<li class="nav-item <?php if($view_name=='account' || $view_name == 'detailAccountMerchant' || $view_name == 'detailAccountCustomer'){echo 'active';}  ?>">
-  <a href="<?php echo base_url('account/1'); ?>">
-    <i class="far fa-user"></i>
-    <p>Akun</p>
-  </a>
-</li>
-
-<li class="nav-item" hidden>
-  <a href="<?php echo base_url('promo'); ?>">
-    <i class="far fa-credit-card"></i>
-    <p>Akun</p>
-    <span class="badge badge-<?php echo $webconf->theme_color;?>">4</span>
-  </a>
+<li class="nav-item <?php if($view_name=='shopPage'){echo 'active';} ?>">
+  <li class="nav-item <?php if($view_name=='shopPage'){echo 'active';} ?>">
+    <a href="<?php echo base_url('product'); ?>">
+      <i class="fas fa-box-open"></i>
+        <p>Produk</p>
+    </a>
+  </li>
 </li>

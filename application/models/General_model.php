@@ -209,6 +209,15 @@ class General_model extends CI_Model
       $this->session->set_flashdata('notify', 'username yang anda berikan tidak tersedia, silahkan periksa kembali');
     }
   }
+
+  public function cDashboard()
+  {
+    if ($this->session->userdata['role']=='merchant') {}
+    $data['view_name'] = 'no';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+
+  }
 }
 
 ?>

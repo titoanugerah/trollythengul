@@ -57,6 +57,11 @@ class General extends CI_Controller
     $this->session->set_userdata($content['captcha']);
     $this->load->view('forgotPassword', $data);
   }
+
+  public function dashboard()
+  {
+    $this->load->view('template', $this->general_model->cDashboard());
+  }
 }
 
 ?>
