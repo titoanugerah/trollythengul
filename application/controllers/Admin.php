@@ -1,0 +1,53 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Admin extends CI_Controller
+{
+  function __construct()
+  {
+    parent::__construct();
+    $this->load->model('admin_model');
+  }
+
+  public function category()
+  {
+    if ($this->input->post('createCategory')) {$this->admin_model->createCategory();}
+    elseif ($this->input->post('updateCategory')) {$this->admin_model->updateCategory();}
+    elseif ($this->input->post('deleteCategory')) {$this->admin_model->deleteCategory();}
+    elseif ($this->input->post('recoverCategory')) {$this->admin_model->recoverCategory();}
+    $this->load->view('template', $this->admin_model->cCategory());
+  }
+
+  public function promo()
+  {
+    if ($this->input->post('createPromo')) {$this->admin_model->createPromo();}
+    elseif ($this->input->post('updatePromo')) {$this->admin_model->updatePromo();}
+    elseif ($this->input->post('activate')) {$this->admin_model->activatePromo();}
+    elseif ($this->input->post('nonactivate')) {$this->admin_model->nonactivatePromo();}
+    $this->load->view('template', $this->admin_model->cPromo());
+  }
+
+  public function webconf()
+  {
+    if ($this->input->post('updateInfo')) {$this->admin_model->updateInfo();}
+    elseif ($this->input->post('updateEmail')) {$this->admin_model->updateEmail();}
+    $this->load->view('template', $this->admin_model->cWebconf());
+  }
+
+  public function account($id)
+  {
+    $this->load->view('template', $this->admin_model->cAccount($id));
+  }
+
+  public function detailAccount($role, $id)
+  {
+    if ($this->input->post('deactivateAccount')) {$this->admin_model->deactivateAccount($id);}
+    elseif ($this->input->post('activateAccount')) {$this->admin_model->activateAccount($id);}
+    elseif ($this->input->post('resetPassword')) {$this->admin_model->resetPassword($id);}
+    $this->load->view('template', $this->admin_model->cDetailAccount($role,$id));
+  }
+
+}
+
+
+ ?>
