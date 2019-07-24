@@ -15,8 +15,8 @@
   </li>
 </li>
 
-<li class="nav-item <?php if($view_name=='shopPage'){echo 'active';} ?>">
-  <li class="nav-item <?php if($view_name=='shopPage'){echo 'active';} ?>">
+<li class="nav-item <?php if($view_name=='product'){echo 'active';} ?>">
+  <li class="nav-item <?php if($view_name=='product'){echo 'active';} ?>">
     <a href="<?php echo base_url('product'); ?>">
       <i class="fas fa-box-open"></i>
         <p>Produk</p>

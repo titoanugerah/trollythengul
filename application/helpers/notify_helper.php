@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
 function notify($title, $message, $type, $icon, $redirect)
 {
   $ci = &get_instance();
