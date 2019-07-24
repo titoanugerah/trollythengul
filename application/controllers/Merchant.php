@@ -12,6 +12,7 @@ class Merchant extends CI_Controller
 
   public function product()
   {
+    if ($this->input->post('recoverProduct')) {$this->merchant_model->recoverProduct();}
     $this->load->view('template', $this->merchant_model->cProduct());
   }
 }

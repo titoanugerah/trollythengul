@@ -18,3 +18,4 @@ $route['account/(:any)'] = 'admin/account/$1';
 $route['detailAccount/(:any)/(:any)'] = 'admin/detailAccount/$1/$2';
 //MERCHANT AREA
 $route['product'] = 'merchant/product';
+$route['detailMyProduct/(:any)'] = 'merchant/detailMyProduct/$1';

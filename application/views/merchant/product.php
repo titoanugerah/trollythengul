@@ -25,43 +25,13 @@
             <p class="text-muted small mb-2"><?php echo $product->category; ?></p>
             <p style="color:green;"><b>Rp. <?php echo $product->price; ?></b> </p>
             <center>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailCategory<?php echo $product->id; ?>">Detail</button> &nbsp;&nbsp;&nbsp;
+            <a href="<?php echo base_url('detailMyProduct/'.$product->id) ?>" class="btn btn-success" >Detail</a> &nbsp;&nbsp;&nbsp;
           </center>
           </div>
         </div>
       </div>
     <?php endforeach; ?>
 
-  </div>
-</div>
-<div class="modal fade" id="addCategory" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <center>
-          <h4>Tambah Kategori</h4>
-        </center>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <form role="form" method="post">
-        <div class="modal-body">
-          <div class="form-group col-6 col-md-12">
-            <label>Nama Kategori</label>
-            <input type="text" class="form-control" placeholder="Masukan nama kategori" name="name" required>
-          </div>
-          <div class="form-group col-6 col-md-12">
-            <label>Deskripsi</label>
-            <textarea name="description" rows="4" cols="80" placeholder="Masukan keterangan kategori" class="form-control" required></textarea>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" name="createCategory" value="createCategory">Tambah Kategori</button>
-          <button type="button" class="btn btn-grey" data-dismiss="modal">Kembali</button>
-        </div>
-      </form>
-    </div>
   </div>
 </div>
 
@@ -78,10 +48,10 @@
       <form role="form" method="post">
         <div class="modal-body">
           <?php //var_dump($product); ?>
-          <div class="form-group col-12 col-md-12"hidden>
+          <div class="form-group col-12 col-md-12">
             <label>Produk</label> &nbsp;&nbsp;&nbsp;&nbsp;
             <select class="select2basic form-control" name="id" style="width:350px">
-              <?php foreach ($product as $item):if($item->status==1){continue;} ?>
+              <?php foreach ($deleted as $item): ?>
                 <option value="<?php echo $item->id; ?>"><?php echo $item->product; ?></option>
               <?php endforeach; ?>
             </select>
@@ -89,7 +59,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success" name="recoverCategory" value="recoverCategory">Kembalikan Kategori</button>
+          <button type="submit" class="btn btn-success" name="recoverProduct" value="recoverProduct">Kembalikan Produk</button>
           <button type="button" class="btn btn-grey" data-dismiss="modal">Kembali</button>
         </div>
       </form>

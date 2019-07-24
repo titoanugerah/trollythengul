@@ -25,6 +25,12 @@ class Merchant_model extends CI_Model
     return $this->db->get_where($table, $where = array($whereVar1 => $whereVal1,$whereVar2 => $whereVal2))->num_rows();
   }
 
+  public function getSomeData2($table, $whereVar1, $whereVal1, $whereVar2, $whereVal2)
+  {
+    return $this->db->get_where($table, $where = array($whereVar1 => $whereVal1,$whereVar2 => $whereVal2))->result();
+  }
+
+
   public function updateData($table, $whereVar, $whereVal, $setVar, $setVal)
   {
     $this->db->where($where = array($whereVar => $whereVal));
@@ -145,11 +151,23 @@ class Merchant_model extends CI_Model
   public function cProduct()
   {
     $data['product'] = $this->getAllData('view_product');
+    $data['deleted'] = $this->getSomeData2('view_product', 'id_merchant', $this->session->userdata['id'], 'status', 0);
     $data['view_name'] = 'product';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
   }
 
+  public function recoverProduct()
+  {
+    $this->updateData('product', 'id', $this->input->post('id'), 'status', 1);
+    notify('Sukses', 'Proses pengembalian produk yang terhapus berhasil dilakukan', 'success', 'fas fa-check', null);
+  }
+
+  public function deleteProduct()
+  {
+    if (md5($this->input->post('password'))==$this->session->userdata['password']) {$this->updateData('product', 'id', $this->input->post('id'), 'status', 0);notify('Sukses', 'Proses pengembalian produk yang terhapus berhasil dilakukan', 'success', 'fas fa-check', null);}
+    else {notify('Gagal', 'Proses penghapusan produk gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', null);}
+  }
 }
 
  ?>
