@@ -168,6 +168,15 @@ class Merchant_model extends CI_Model
     if (md5($this->input->post('password'))==$this->session->userdata['password']) {$this->updateData('product', 'id', $this->input->post('id'), 'status', 0);notify('Sukses', 'Proses pengembalian produk yang terhapus berhasil dilakukan', 'success', 'fas fa-check', null);}
     else {notify('Gagal', 'Proses penghapusan produk gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', null);}
   }
+
+  public function cDetailMyProduct($id)
+  {
+    $data['product'] = $this->getDataRow('view_product', 'id', $id);
+    $data['merchant'] = $this->getDataRow('view_merchant', 'id', $data['product']->id_merchant);
+    $data['view_name'] = 'detailMyProduct';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+  }
 }
 
  ?>

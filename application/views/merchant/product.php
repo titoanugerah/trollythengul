@@ -18,12 +18,12 @@
       <div class="col-lg-3">
         <div class="card">
           <div class="p-2">
-            <img class="card-img-top rounded" src="<?php echo base_url('./assets/upload/'.$product->image); ?>" alt="Product 1" style="width:200px">
+            <img class="card-img-top rounded" src="<?php echo base_url('./assets/upload/'.$product->image); ?>" alt="Product 1" style="height: 140px;">
           </div>
           <div class="card-body pt-2">
             <h4 class="mb-1 fw-bold"><?php echo $product->product; ?></h4>
             <p class="text-muted small mb-2"><?php echo $product->category; ?></p>
-            <p style="color:green;"><b>Rp. <?php echo $product->price; ?></b> </p>
+            <p style="color:green;"><b>Rp. <?php echo number_format($product->price,2,',','.'); ?></b> </p>
             <center>
             <a href="<?php echo base_url('detailMyProduct/'.$product->id) ?>" class="btn btn-success" >Detail</a> &nbsp;&nbsp;&nbsp;
           </center>
