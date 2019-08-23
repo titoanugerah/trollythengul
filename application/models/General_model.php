@@ -152,7 +152,8 @@ class General_model extends CI_Model
       notify('Berhasil Masuk', 'Selamat datang kembali '.$login['session']['fullname'],'success','fas fa-smile-wink',null);
     } else {
       $login['status'] = false;
-      $this->session->set_flashdata('notify', 'Kombinasi tidak cocok');
+      notify('Gagal Masuk', 'Mohon maaf kombinasi username dan password anda salah, silahkan periksa kembali','danger','fas fa-bullhorn',null);
+
     }
     return $login;
   }

@@ -65,7 +65,7 @@ class General extends CI_Controller
 
   public function register()
   {
-    $this->load->view('register')
+//    $this->load->view('register', $this->general_model->cLogin());
   }
 }
 
