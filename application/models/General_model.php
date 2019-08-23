@@ -14,6 +14,17 @@ class General_model extends CI_Model
     return $this->db->get_where($table, $where = array($whereVar => $whereVal))->row();
   }
 
+  public function getSomeData($table, $whereVar, $whereVal)
+  {
+    return $this->db->get_where($table, $where = array($whereVar => $whereVal))->result();
+  }
+
+
+  public function getAllData($table)
+  {
+    return $this->db->get($table)->result();
+  }
+
   public function getNumRow($table, $whereVar, $whereVal)
   {
     return $this->db->get_where($table, $where = array($whereVar => $whereVal))->num_rows();
@@ -137,9 +148,11 @@ class General_model extends CI_Model
   }
 
   //APPLICATION
-  public function cShopPage()
+  public function cShopPage($keyword, $page)
   {
-    $data['view_name'] = 'no';
+    $data['product'] = $this->db->query('select * from view_product where fullname LIKE "%'.$keyword.'%" or merchant LIKE "%'.$keyword.'%" or product LIKE "%'.$keyword.'%" or description LIKE "%'.$keyword.'%" or category LIKE "%'.$keyword.'%" order by rating desc limit '.($page*50).','.(($page*50)+50))->result();
+    $data['category'] = $this->getAllData('category');
+    $data['view_name'] = 'shopPage';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
   }
@@ -241,11 +254,23 @@ class General_model extends CI_Model
 
   public function cDashboard()
   {
-    if ($this->session->userdata['role']=='merchant') {}
+//    if ($this->session->userdata['role']=='merchant') {}
     $data['view_name'] = 'no';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
+  }
 
+  public function cDetailProduct($id)
+  {
+    $data['shipment'] = $this->db->query('select shipment_province, count(id) from view_detail_order where id_merchant= '.$this->session->userdata['id'].' group by shipment_province')->result();
+    $data['attachment'] = $this->getSomeData('attachment', 'id_product', $id);
+    $data['attachment1'] = $this->getSomeData('attachment', 'id_product', $id);
+    $data['category'] = $this->getAllData('view_category');
+    $data['product'] = $this->getDataRow('view_product', 'id', $id);
+    $data['merchant'] = $this->getDataRow('merchant', 'id', $data['product']->id_merchant);
+    $data['view_name'] = 'detailProduct';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
   }
 }
 

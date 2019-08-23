@@ -19,8 +19,11 @@ class General extends CI_Controller
 
   public function shopPage()
   {
-    $content = $this->general_model->cShopPage();
-    $this->load->view('template', $content);
+    $page = 0;$keyword = null;
+    if ($this->input->post('nextPage')) {$page = $page+1;}
+    elseif($this->input->post('prevPage') && $page!=0){$page=$page-1;}
+    elseif ($this->input->post('search')) {$keyword = $this->input->post('keyword');}
+    $this->load->view('template', $this->general_model->cShopPage($keyword, $page));
   }
 
   public function login()
@@ -62,6 +65,12 @@ class General extends CI_Controller
   public function dashboard()
   {
     $this->load->view('template', $this->general_model->cDashboard());
+  }
+
+  public function detailProduct($id)
+  {
+    $this->load->view('template', $this->general_model->cDetailProduct($id));
+    
   }
 
 }
