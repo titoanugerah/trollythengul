@@ -36,7 +36,7 @@
 					</div>
 					<div class="form-group">
 						<label for="password" class="placeholder"><b>Password</b></label>
-						<a href="#" class="link float-right">Lupa Password?</a>
+						<a href="<?php echo base_url('forgotPassword'); ?>" class="link float-right">Lupa Password?</a>
 						<div class="position-relative">
 							<input id="password" name="password" type="password" class="form-control" required>
 							<div class="show-password">
@@ -58,7 +58,6 @@
 		<div class="container container-signup animated fadeIn">
 			<h3 class="text-center">Daftar Pengguna Baru</h3>
 			<form  method="post">
-
 				<div class="login-form">
 					<div class="form-group">
 						<label for="fullname" class="placeholder"><b>Username</b></label>
@@ -82,7 +81,6 @@
 						</div>
 						<div class="col-md-6">
 							<button type="submit" name="register" value="register" class="btn btn-primary float-right  fw-bold">Daftar</button>
-
 						</div>
 					</div>
 				</div>

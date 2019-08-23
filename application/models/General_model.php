@@ -205,7 +205,9 @@ class General_model extends CI_Model
       $this->updateData('account', 'username', $this->input->post('username'), 'password', md5($newPassword));
       $content = 'kami informasikan bahwa akun anda berhasil di reset dengan password baru '.$newPassword;
       $this->sentEmail($this->getDataRow('account', 'username', $this->input->post('username'))->email, $this->getDataRow('account', 'username', $this->input->post('username'))->fullname, 'Password baru akun anda', $content);
-      $this->session->set_flashdata('notify', 'Password berhasil direset silahkan cek email anda');
+      //$this->session->set_flashdata('notify', 'Password berhasil direset silahkan cek email anda');
+      notify('Berhasil Direset', 'Password, anda berhasil direset, silahkan cek email anda untuk mendapatkan password terbaru','success','fas fa-smile-wink','login');
+
     } else {
       $this->session->set_flashdata('notify', 'username yang anda berikan tidak tersedia, silahkan periksa kembali');
     }

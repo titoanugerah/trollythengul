@@ -53,9 +53,8 @@ class General extends CI_Controller
   public function forgotPassword()
   {
     if($this->input->post('resetPassword')){$this->general_model->resetPassword();}
-    $data['content'] = $this->general_model->cForgotPassword();
-    $this->session->set_userdata($content['captcha']);
-    $this->load->view('forgotPassword', $data);
+    //  $this->session->set_userdata($content['captcha']);
+    $this->load->view('forgotPassword', $this->general_model->cForgotPassword());
   }
 
   public function dashboard()
@@ -63,10 +62,6 @@ class General extends CI_Controller
     $this->load->view('template', $this->general_model->cDashboard());
   }
 
-  public function register()
-  {
-//    $this->load->view('register', $this->general_model->cLogin());
-  }
 }
 
 ?>

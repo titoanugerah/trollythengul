@@ -1,101 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title><?php echo $content['webconf']->office_name.' | '.'Login'; ?></title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="<?php echo base_url('./assets/template/login/'); ?>images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>css/util.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('./assets/template/login/'); ?>css/main.css">
-<!--===============================================================================================-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Lupa Password | <?php echo $webconf->office_name; ?></title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="https://themekita.com/demo-atlantis-bootstrap/livepreview/examples/assets/img/icon.ico" type="image/x-icon"/>
+
+	<!-- Fonts and icons -->
+	<script src="<?php echo base_url('./assets/template/newlogin'); ?>/assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+	WebFont.load({
+		google: {"families":["Lato:300,400,700,900"]},
+		custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['<?php echo base_url('./assets/template/AtlantisLite'); ?>/assets/css/fonts.min.css']},
+		active: function() {
+			sessionStorage.fonts = true;
+		}
+	});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="<?php echo base_url('./assets/template/newlogin'); ?>/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url('./assets/template/newlogin'); ?>/assets/css/atlantis.css">
 </head>
-<body>
+<body class="login">
+	<div class="wrapper wrapper-login">
+		<div class="container container-login animated fadeIn">
+			<h3 class="text-center">Lupa Password</h3>
+			<form  method="post">
 
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('<?php echo base_url('./assets/template/login/'); ?>images/bg-01.jpg');">
-			<div class="wrap-login100 p-l-60 p-r-60 p-t-32 p-b-33">
-				<form class="login100-form validate-form flex-sb flex-w" method="post">
-					<span class="login100-form-title p-b-3">
-						Lupa Password
-					</span>
-
-          <br><br>          <br><br>
-
-					<div class="wrap-input100 validate-input" data-validate = "Username harus diisi">
-						<input class="input100" type="text" name="username" placeholder="masukan username">
-						<span class="focus-input100"></span>
+				<div class="login-form">
+					<div class="form-group">
+						<label for="username" class="placeholder"><b>Username</b></label>
+						<input id="username" name="username" type="text" class="form-control" required>
 					</div>
 
-					<div class="p-t-1 p-b-1">
-						<a href="<?php echo base_url('forgotPassword'); ?>" class="txt2 bo1 m-l-5">
-						</a>
+					<div class="form-group form-action-d-flex mb-3">
+						<button type="submit" name="resetPassword" value="resetPassword" class="btn btn-primary col-md-5 float-right mt-3 mt-sm-0 fw-bold">Login</button>
+					</div>
+					<div class="login-account">
+						<span class="msg">Belum punya akun?</span>
+						<a href="#" id="show-signup" class="link">Daftar sekarang</a>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="container container-signup animated fadeIn">
+			<h3 class="text-center">Daftar Pengguna Baru</h3>
+			<form  method="post">
+				<div class="login-form">
+					<div class="form-group">
+						<label for="fullname" class="placeholder"><b>Username</b></label>
+						<input  id="fullname" name="username" type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="email" class="placeholder"><b>Email</b></label>
+						<input  id="email" name="email" type="email" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="email" class="placeholder"><b>Jenis Akun</b></label>
+						<select class="form-control" name="role">
+							<option value="client">Pembeli</option>
+							<option value="merchant">Penjual</option>
+						</select>
 					</div>
 
-          <br><br>
-          <br><br>
-          <br><br>
-
-					<div class="container-login100-form-btn m-t-17">
-						<button class="login100-form-btn btn-success" type="submit" name="resetPassword" value="resetPassword">
-							Reset Password
-						</button>
-            &nbsp;&nbsp;&nbsp;
-            <a class="login100-form-btn" href="<?php echo base_url('login'); ?>">
-							Kembali
-						</a>
+					<div class="row form-action">
+						<div class="col-md-3">
+							<a href="#" id="show-signin" class="btn btn-danger btn-link w-100 fw-bold">Batal</a>
+						</div>
+						<div class="col-md-6">
+							<button type="submit" name="register" value="register" class="btn btn-primary float-right  fw-bold">Daftar</button>
+						</div>
 					</div>
-						<p style="text-align:center;" class="txt2"><?php echo $this->session->userdata['notify'] ?></p>
-					<div class="w-full text-center p-t-35">
-						<span class="txt2">
-							Belum punya akun?
-						</span>
+				</div>
+			</form>
 
-						<a href="<?php echo base_url('register'); ?>" class="txt2 bo1">
-							daftar disini
-						</a>
-					</div>
-				</form>
-			</div>
 		</div>
 	</div>
-
-
-	<div id="dropDownSelect1"></div>
-
-<!--===============================================================================================-->
-	<script src="<?php echo base_url('./assets/template/login/'); ?>vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo base_url('./assets/template/login/'); ?>vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo base_url('./assets/template/login/'); ?>vendor/bootstrap/js/popper.js"></script>
-	<script src="<?php echo base_url('./assets/template/login/'); ?>vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo base_url('./assets/template/login/'); ?>vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo base_url('./assets/template/login/'); ?>vendor/daterangepicker/moment.min.js"></script>
-	<script src="<?php echo base_url('./assets/template/login/'); ?>vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo base_url('./assets/template/login/'); ?>vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo base_url('./assets/template/login/'); ?>js/main.js"></script>
-
+	<script src="<?php echo base_url('./assets/template/newlogin'); ?>/assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="<?php echo base_url('./assets/template/newlogin'); ?>/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="<?php echo base_url('./assets/template/newlogin'); ?>/assets/js/core/popper.min.js"></script>
+	<script src="<?php echo base_url('./assets/template/newlogin'); ?>/assets/js/core/bootstrap.min.js"></script>
+	<script src="<?php echo base_url('./assets/template/newlogin'); ?>/assets/js/atlantis.min.js"></script>
+	<script src="<?php echo base_url('./assets/template/AtlantisLite/'); ?>assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+	<script type="text/javascript">
+		//Notify
+		<?php if($this->session->userdata['notify']){
+			echo "$.notify({icon: '".$this->session->userdata['icon']."',
+			title: '".$this->session->userdata['title']."',
+			message: '".$this->session->userdata['message']."',},{
+				type: '".$this->session->userdata['type']."',
+				placement : { from: 'bottom', align: 'right'}, time: 1000 });";
+			} ?>
+		</script>
 </body>
+
 </html>
