@@ -186,7 +186,7 @@ class Merchant_model extends CI_Model
     } else {
       $data['attachment'] = $this->getSomeData('attachment', 'id_product', $id);
     }
-    $data['']
+    $data['shipment'] = $this->db->query('select shipment_province, count(id) from view_detail_order where id_merchant= '.$this->session->userdata['id'].' group by shipment_province')->result();
     $data['category'] = $this->getAllData('view_category');
     $data['product'] = $this->getDataRow('view_product', 'id', $id);
     $data['merchant'] = $this->getDataRow('view_merchant', 'id', $data['product']->id_merchant);

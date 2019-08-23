@@ -121,8 +121,35 @@
     </center>
     </div>
     <div class="tab-pane fade show" id="tab4" role="tabpanel">
-
+      <div class="table-responsive">
+        <table id="multi-filter-select" class="display table table-striped table-hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Provinsi</th>
+              <th>Order</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>No</th>
+              <th>Provinsi</th>
+              <th>Order</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <?php $i=1;foreach ($shipment as $item): ?>
+              <tr>
+                <td><?php echo $i; ?></td>
+                <td><?php echo $item->shipment_province; ?></td>
+                <td><?php echo $item->shipment_count.' kali order'; ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
   </div>
+</div>
 </div>
 
 <div class="modal fade" id="myModal" role="dialog">
