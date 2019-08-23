@@ -177,6 +177,14 @@ class Merchant_model extends CI_Model
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
   }
+
+  public function cAddProduct()
+  {
+    $data['category'] = $this->getAllData('view_category');
+    $data['view_name'] = 'addProduct';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+  }
 }
 
  ?>

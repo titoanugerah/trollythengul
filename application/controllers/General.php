@@ -27,6 +27,7 @@ class General extends CI_Controller
   {
     if ($this->session->userdata['login']) {redirect(base_url('shopPage'));}
     elseif ($this->input->post('loginValidation')) {$login = $this->general_model->loginValidation();if ($login['status']) {$this->session->set_userdata($login['session']); redirect(base_url('shopPage'));}}
+    elseif($this->input->post('register')){$this->general_model->register();}
     $this->load->view('login', $this->general_model->cLogin());
   }
 
@@ -53,6 +54,7 @@ class General extends CI_Controller
   public function forgotPassword()
   {
     if($this->input->post('resetPassword')){$this->general_model->resetPassword();}
+    elseif($this->input->post('register')){$this->general_model->register();}
     //  $this->session->set_userdata($content['captcha']);
     $this->load->view('forgotPassword', $this->general_model->cForgotPassword());
   }

@@ -207,10 +207,36 @@ class General_model extends CI_Model
       $this->sentEmail($this->getDataRow('account', 'username', $this->input->post('username'))->email, $this->getDataRow('account', 'username', $this->input->post('username'))->fullname, 'Password baru akun anda', $content);
       //$this->session->set_flashdata('notify', 'Password berhasil direset silahkan cek email anda');
       notify('Berhasil Direset', 'Password, anda berhasil direset, silahkan cek email anda untuk mendapatkan password terbaru','success','fas fa-smile-wink','login');
-
     } else {
       $this->session->set_flashdata('notify', 'username yang anda berikan tidak tersedia, silahkan periksa kembali');
+      notify('Gagal ', 'Mohon maaf kombinasi username anda salah, silahkan periksa kembali','danger','fas fa-bullhorn',null);
     }
+  }
+
+  public function register()
+  {
+    if($this->getNumRow('account', 'username', $this->input->post('username'))==1 || $this->getNumRow('account', 'email', $this->input->post('email'))==1){
+      notify('Gagal ', 'Mohon maaf kombinasi username dan email anda sudah terdaftar, silahkan login','warning','fas fa-bullhorn','login');
+    } else {
+      $newPassword = rand(1000000,9999999);
+      $data = array(
+        'username' => $this->input->post('username'),
+        'password' => md5($newPassword),
+        'email' => $this->input->post('email'),
+        'fullname' => $this->input->post('username'),
+        'role' => $this->input->post('role'),
+        'status' => 1,
+        'display_picture' => 'no.jpg'
+       );
+       $this->db->insert('account', $data);
+       if ($this->input->post('role')=='merchant') {
+         $this->db->insert('merchant', $data = array('id' => $this->db->insert_id()));
+       }
+       $content = 'Akun anda berhasil dibuat silahkan login menggunakan password '.$newPassword;
+       $this->sentEmail($this->input->post('email'), $this->input->post('username'), 'Selamat Datang Pengguna Baru', $content);
+       notify('Berhasil', 'Akun anda berhasil dibuat, silahkan cek email anda untuk mendapatkan password','success','fas fa-smile-wink','login');
+    }
+
   }
 
   public function cDashboard()
