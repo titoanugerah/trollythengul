@@ -62,6 +62,11 @@ class General extends CI_Controller
   {
     $this->load->view('template', $this->general_model->cDashboard());
   }
+
+  public function register()
+  {
+    $this->load->view('register')
+  }
 }
 
 ?>

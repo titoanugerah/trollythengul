@@ -228,7 +228,6 @@
 	<script src="<?php echo base_url('./assets/template/AtlantisLite/'); ?>assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 	<script src="<?php echo base_url('./assets/template/AtlantisLite/'); ?>assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 	<script src="<?php echo base_url('./assets/template/AtlantisLite/'); ?>assets/js/atlantis.min.js"></script>
-	<script src="<?php echo base_url('./assets/template/AtlantisLite/'); ?>assets/js/setting-demo.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 

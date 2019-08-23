@@ -10,6 +10,7 @@ $route['default_controller'] = 'general';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['dashboard'] = 'general/dashboard';
+$route['register'] = 'general/register';
 //ADMIN AREA
 $route['webconf'] = 'admin/webconf';
 $route['category'] = 'admin/category';

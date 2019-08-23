@@ -69,25 +69,45 @@
       </div>
     </div>
       <div class="tab-pane fade show" id="tab2" role="tabpanel" >
-        <div class="row">
-          <div class="form-group">
-            <label>Nama Pengguna Akun</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">@</span>
+        <div class="card-body row">
+          <div class="col-md-8 row">
+            <div class="form-group col-md-4">
+              <label>Nama Merchant</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Masukan nama merchant" aria-label="name" aria-describedby="basic-addon1" name="name" value="<?php echo $merchant->merchant; ?>">
               </div>
-              <input type="text" class="form-control" placeholder="Masukan username" aria-label="Username" aria-describedby="basic-addon1" name="username" value="<?php echo $detail->username; ?>">
+            </div>
+
+            <div class="form-group col-6 col-md-4">
+              <label>Nomor Telepon</label>
+              <input type="text" class="form-control" placeholder="Masukan nomor telepon" name="phone_number" value="<?php echo $merchant->phone_number; ?>">
+            </div>
+
+            <div class="form-group col-6 col-md-4">
+              <label>Tanggal Mendaftar</label>
+              <input type="text" class="form-control" value="<?php echo $merchant->join_date; ?>">
+            </div>
+
+
+            <div class="form-group col-md-3">
+              <label>Alamat</label>
+              <input type="text" class="form-control" placeholder="Masukan jalan toko anda" name="address_street" value="<?php echo $merchant->address_street; ?>">
+            </div>
+            <div class="form-group col-md-3">
+              <label>Kota</label>
+              <input type="text" class="form-control" placeholder="Masukan kota toko anda" name="address_city" value="<?php echo $merchant->address_city; ?>">
+            </div>
+            <div class="form-group col-md-3">
+              <label>Provinsi</label>
+              <input type="text" class="form-control" placeholder="Masukan provinsi toko anda" name="address_province" value="<?php echo $merchant->address_city; ?>">
+            </div>
+            <div class="form-group col-md-3">
+              <label>kode pos</label>
+              <input type="text" class="form-control" placeholder="Masukan kode pos toko anda" name="address_postal_code" value="<?php echo $merchant->address_postal; ?>">
             </div>
           </div>
-
-          <div class="form-group col-6 col-md-5">
-            <label>Nama Lengkap</label>
-            <input type="text" class="form-control" placeholder="Masukan nama lengkap" name="fullname" value="<?php echo $detail->fullname; ?>">
-          </div>
-
-          <div class="form-group col-6 col-md-4">
-            <label>Email</label>
-            <input type="email" class="form-control" placeholder="Masukan email anda" name="email" value="<?php echo $detail->email; ?>">
+          <div class="col-md-4">
+            <img src="<?php echo base_url('./assets/upload/'.$merchant->display_picture); ?>" style="width:300px; border-radius: 3%;">
           </div>
         </div>
       </div>
