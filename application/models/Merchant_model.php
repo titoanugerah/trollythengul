@@ -186,6 +186,7 @@ class Merchant_model extends CI_Model
     } else {
       $data['attachment'] = $this->getSomeData('attachment', 'id_product', $id);
     }
+    $data['']
     $data['category'] = $this->getAllData('view_category');
     $data['product'] = $this->getDataRow('view_product', 'id', $id);
     $data['merchant'] = $this->getDataRow('view_merchant', 'id', $data['product']->id_merchant);
@@ -249,7 +250,22 @@ class Merchant_model extends CI_Model
   {
     $this->updateData('product', 'id', $id_product, 'id_attachment', $id_attachment);
     notify('Sukses', 'Proses pemilihan gambar berhasil dilakukan', 'success', 'fas fa-plus', 'detailMyProduct/'.$id_product);
+  }
 
+  public function updateProduct($id)
+  {
+    $data = array(
+      'name' => $this->input->post('name'),
+      'id_category' => $this->input->post('id_category'),
+      'price' => $this->input->post('price'),
+      'description' => $this->input->post('description'),
+      'weight' => $this->input->post('weight'),
+      'size_length' => $this->input->post('size_length'),
+      'size_width' => $this->input->post('size_width'),
+      'size_height' => $this->input->post('size_height'),
+     );
+     $this->db->where($where = array('id' => $id ));
+     $this->db->update('product', $data);
   }
 }
 
