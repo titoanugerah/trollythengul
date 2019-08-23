@@ -61,17 +61,17 @@
 
             <div class="form-group col-md-4">
               <label>Panjang (cm)</label>
-              <input type="number" class="form-control"  name="length" value="" required>
+              <input type="number" class="form-control"  name="size_length" value="" required>
             </div>
 
             <div class="form-group col-md-4">
               <label>Lebar (cm)</label>
-              <input type="number" class="form-control"  name="width" value="" required>
+              <input type="number" class="form-control"  name="size_width" value="" required>
             </div>
 
             <div class="form-group col-md-4">
               <label>Tinggi (cm)</label>
-              <input type="number" class="form-control"  name="height" value="" required>
+              <input type="number" class="form-control"  name="size_height" value="" required>
             </div>
 
 
@@ -83,8 +83,13 @@
       </form>
     </div>
     <div class="tab-pane fade show" id="tab2" role="tabpanel" >
-      <div class="card-body">
-        
+      <div class="card card-secondary card-annoucement card-round col-12" >
+        <div class="card-body text-center">
+          <div class="card-opening">Belum Tersedia</div>
+          <div class="card-desc">
+            Silahkan lengkapi terlebih dahulu data pada tab informasi
+          </div>
+        </div>
       </div>
     </div>
   </div>

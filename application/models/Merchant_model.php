@@ -20,6 +20,16 @@ class Merchant_model extends CI_Model
     return $this->db->get_where($table, $where = array($whereVar => $whereVal))->num_rows();
   }
 
+  public function getSomeData($table, $whereVar, $whereVal)
+  {
+    return $this->db->get_where($table, $where = array($whereVar => $whereVal))->result();
+  }
+
+  public function deleteData($table, $whereVar, $whereVal)
+  {
+    return $this->db->delete($table, $where = array($whereVar => $whereVal ));
+  }
+
   public function getNumRow2($table, $whereVar1, $whereVal1, $whereVar2, $whereVal2)
   {
     return $this->db->get_where($table, $where = array($whereVar1 => $whereVal1,$whereVar2 => $whereVal2))->num_rows();
@@ -171,6 +181,12 @@ class Merchant_model extends CI_Model
 
   public function cDetailMyProduct($id)
   {
+    if ($this->getNumRow('attachment', 'id_product', $id)==0) {
+      $data['attachment'] = $this->getSomeData('attachment', 'id', 0);
+    } else {
+      $data['attachment'] = $this->getSomeData('attachment', 'id_product', $id);
+    }
+    $data['category'] = $this->getAllData('view_category');
     $data['product'] = $this->getDataRow('view_product', 'id', $id);
     $data['merchant'] = $this->getDataRow('view_merchant', 'id', $data['product']->id_merchant);
     $data['view_name'] = 'detailMyProduct';
@@ -184,6 +200,56 @@ class Merchant_model extends CI_Model
     $data['view_name'] = 'addProduct';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
+  }
+
+  public function addProduct()
+  {
+    $data = array(
+      'name' => $this->input->post('name'),
+      'id_category' => $this->input->post('id_category'),
+      'price' => $this->input->post('price'),
+      'description' => $this->input->post('description'),
+      'weight' => $this->input->post('weight'),
+      'size_length' => $this->input->post('size_length'),
+      'size_width' => $this->input->post('size_width'),
+      'size_height' => $this->input->post('size_height'),
+      'id_merchant' => $this->session->userdata['id'],
+      'status' => 1,
+      'id_attachment' => 'no.jpg'
+     );
+     $this->db->insert('product', $data);
+     notify('Sukses', 'Proses penambahan berhasil dilakukan, silahkan tambahkan gambar pada kolom gambar', 'success', 'fas fa-plus', 'detailMyProduct/'.$this->db->insert_id());
+  }
+
+  public function addImage($id)
+  {
+    $this->db->insert('attachment', $data = array('id_product' => $id, 'id_account' => $this->session->userdata['id'] ));
+    $this->updateData('attachment', 'id', $this->db->insert_id(), 'image', 'image_'.$this->db->insert_id().$this->uploadFile('image_'.$this->db->insert_id(),'jpg|png')['ext']);
+    $this->updateData('product', 'id', $id, 'id_attachment', $this->db->insert_id());
+    notify('Sukses', 'Proses penambahan gambar berhasil dilakukan', 'success', 'fas fa-plus', 'detailMyProduct/'.$id);
+  }
+
+  public function deleteAttachment($id)
+  {
+    if (md5($this->input->post('password'))==$this->session->userdata['password']) {
+      unlink(base_url('./assets/upload/'.$this->getDataRow('attachment', 'id', $this->input->post('id'))->image));
+      $this->deleteData('attachment', 'id', $this->input->post('id'));
+      if ($this->getNumRow2('product', 'id', $id, 'id_attachment', $this->input->post('id')) && ($this->getNumRow('attachment', 'id_product', $id)>0)) {
+        $this->updateData('product', 'id', $id, 'id_attachment', $this->getSomeData('attachment', 'id_product', $id)[0]->id);
+      } elseif ($this->getNumRow2('product', 'id', $id, 'id_attachment', $this->input->post('id')) && ($this->getNumRow('attachment', 'id_product', $id)==0)) {
+        $this->updateData('product', 'id', $id, 'id_attachment', 0);
+      }
+      notify('Sukses', 'Proses penghapusan gambar berhasil dilakukan', 'success', 'fas fa-plus', 'detailMyProduct/'.$id);
+    } else {
+      notify('Gagal', 'Proses penghapusan produk gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', 'detailMyProduct/'.$id);
+    }
+  }
+
+  public function setDefaultImage($id_product,$id_attachment)
+  {
+    $this->updateData('product', 'id', $id_product, 'id_attachment', $id_attachment);
+    notify('Sukses', 'Proses pemilihan gambar berhasil dilakukan', 'success', 'fas fa-plus', 'detailMyProduct/'.$id_product);
+
   }
 }
 

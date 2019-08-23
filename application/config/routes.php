@@ -20,3 +20,4 @@ $route['detailAccount/(:any)/(:any)'] = 'admin/detailAccount/$1/$2';
 $route['product'] = 'merchant/product';
 $route['detailMyProduct/(:any)'] = 'merchant/detailMyProduct/$1';
 $route['addProduct'] = 'merchant/addProduct';
+$route['setDefaultImage/(:any)/(:any)'] = 'merchant/setDefaultImage/$1/$2';
