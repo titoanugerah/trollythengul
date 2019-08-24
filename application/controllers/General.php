@@ -22,7 +22,7 @@ class General extends CI_Controller
     $page = 0;$keyword = null;
     if ($this->input->post('nextPage')) {$page = $page+1;}
     elseif($this->input->post('prevPage') && $page!=0){$page=$page-1;}
-    elseif ($this->input->post('search')) {$keyword = $this->input->post('keyword');}
+    elseif ($this->input->post('keyword')) {$keyword = $this->input->post('keyword');}
     $this->load->view('template', $this->general_model->cShopPage($keyword, $page));
   }
 
@@ -70,7 +70,7 @@ class General extends CI_Controller
   public function detailProduct($id)
   {
     $this->load->view('template', $this->general_model->cDetailProduct($id));
-    
+
   }
 
 }

@@ -267,7 +267,7 @@ class General_model extends CI_Model
     $data['attachment1'] = $this->getSomeData('attachment', 'id_product', $id);
     $data['category'] = $this->getAllData('view_category');
     $data['product'] = $this->getDataRow('view_product', 'id', $id);
-    $data['merchant'] = $this->getDataRow('merchant', 'id', $data['product']->id_merchant);
+    $data['merchant'] = $this->getDataRow('view_merchant', 'id', $data['product']->id_merchant);
     $data['view_name'] = 'detailProduct';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
