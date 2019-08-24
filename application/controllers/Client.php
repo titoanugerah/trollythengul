@@ -10,13 +10,20 @@ class Client extends CI_Controller
   function __construct()
   {
     parent::__construct();
-    $this->load->model('CLient_model');
+    $this->load->model('client_model');
   }
 
 
   public function myCart()
   {
-    $this->load->view('template', $this->CLient_model->cMyCart());
+    if ($this->input->post('deleteFromCart')) {$this->client_model->deleteFromCart();}
+    elseif ($this->input->post('updateDetailOrder')) {$this->client_model->updateDetailOrder();}
+    $this->load->view('template', $this->client_model->cMyCart());
+  }
+
+  public function goToPayment($id)
+  {
+    $this->load->view('template', $this->client_model->cGoToPayment($id));
   }
 }
 

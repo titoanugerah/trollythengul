@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  *
  */
-class CLient_model extends CI_Model
+class Client_model extends CI_Model
 {
 
   function __construct()
@@ -44,6 +44,10 @@ class CLient_model extends CI_Model
     return $this->db->get_where($table, $where = array($whereVar1 => $whereVal1,$whereVar2 => $whereVal2))->row();
   }
 
+  public function deleteData($table, $whereVar, $whereVal)
+  {
+    return $this->db->delete($table, $where = array($whereVar => $whereVal ));
+  }
 
   public function updateData($table, $whereVar, $whereVal, $setVar, $setVal)
   {
@@ -104,11 +108,35 @@ class CLient_model extends CI_Model
       $this->db->insert('order',$content = array('id_customer' => $this->session->userdata['id'], 'status' => 0));
       $id_order = $this->db->insert_id();
     } else {
-      $id_order = $this->getDataRow('order', 'id_customer', $this->session->userdata['id'], 'status', 0)->id_order;
+      $id_order = $this->getDataRow('order', 'id_customer', $this->session->userdata['id'], 'status', 0)->id;
     }
     $merchant = $this->getDataRow('product', 'id', $id);
     $this->db->insert('detail_order', $data = array('id_order' => $id_order, 'id_product' => $id, 'id_merchant' => $merchant->id_merchant, 'qty' => $this->input->post('qty'), 'price' => $merchant->price, 'special_request' => $this->input->post('special_request')));
     notify('Berhasil ditambahkan', 'Barang berhasil ditambahkan ke keranjang','success','fas fa-plus','myCart');
+  }
+
+
+  public function deleteFromCart()
+  {
+    $this->deleteData('detail_order', 'id', $this->input->post('id'));
+    notify('Berhasil dihapus', 'Barang berhasil dihapus dari keranjang','success','fas fa-plus','myCart');
+  }
+
+  public function updateDetailOrder()
+  {
+    $this->updateData('detail_order', 'id', $this->input->post('id'), 'qty', $this->input->post('qty'));
+    $this->updateData('detail_order', 'id', $this->input->post('id'), 'special_request', $this->input->post('special_request'));
+    notify('Berhasil diupdate', 'Barang berhasil diupdate dari keranjang','success','fas fa-check','myCart');
+  }
+
+  public function cGoToPayment($id)
+  {
+    $data['order'] =$this->getDataRow('order', 'id', $id);
+    $data['detailOrder'] = $this->getSomeData('view_detail_order', 'id_order', $id);
+    $data['view_name'] = 'goToPayment';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+
   }
 
 }

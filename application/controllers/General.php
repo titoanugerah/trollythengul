@@ -72,8 +72,9 @@ class General extends CI_Controller
   {
     if ($this->input->post('addToCart')) {$this->client_model->addToCart($id);}
     $this->load->view('template', $this->general_model->cDetailProduct($id));
-
   }
+
+
 
 }
 
