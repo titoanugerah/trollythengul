@@ -110,6 +110,19 @@ class General_model extends CI_Model
         'address_province' => $account->address_province,
         'address_postal' => $account->address_postal,
        );
+    } elseif ($account->role=='client') {
+      $session = array(
+        'login' => true,
+        'id' => $account->id,
+        'username' => $account->username,
+        'password' => $account->password,
+        'fullname' => $account->fullname,
+        'email' => $account->email,
+        'role' => $account->role,
+        'status' => $account->status,
+        'join_date' => $account->join_date,
+        'display_picture' => $account->display_picture,
+       );
     }
 
     return $session;
