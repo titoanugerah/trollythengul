@@ -83,6 +83,25 @@ class Client_model extends CI_Model
     return $data;
   }
 
+  public function getCity()
+  {
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://api.rajaongkir.com/starter/city",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_HTTPHEADER => array(
+        "key: 585ef1d017b0c127167d9350ad10d026"
+      ),
+    ));
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+  }
+
   //APPLICATION
   public function cMyCart()
   {
@@ -129,14 +148,14 @@ class Client_model extends CI_Model
     notify('Berhasil diupdate', 'Barang berhasil diupdate dari keranjang','success','fas fa-check','myCart');
   }
 
-  public function cGoToPayment($id)
+  public function cStatusOrder($id)
   {
-    $data['order'] =$this->getDataRow('order', 'id', $id);
+    $data['destination'] = $this->getCity();
+    $data['order'] =$this->getDataRow('view_order', 'id', $id);
     $data['detailOrder'] = $this->getSomeData('view_detail_order', 'id_order', $id);
-    $data['view_name'] = 'goToPayment';
+    $data['view_name'] = 'StatusOrder';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
-
   }
 
 }

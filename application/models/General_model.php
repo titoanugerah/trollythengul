@@ -68,6 +68,31 @@ class General_model extends CI_Model
     $data['result'] = $data['A'] + $data['B'];
     return $data;
   }
+
+
+    public function callRajaOngkirAPI($param)
+    {
+      $curl = curl_init();
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.rajaongkir.com/starter/".$param,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+          "key: 585ef1d017b0c127167d9350ad10d026"
+        ),
+      ));
+      $response = json_decode(curl_exec($curl))->rajaongkir;
+      $err = curl_error($curl);
+      if ($response->status->description=='OK') {
+        return $response->results;
+     } else {
+       notify('Gagal', 'Gagal mengambil lokasi dari API : '.curl_error($curl).$response->status->description, 'danger', 'fas fa-bell-slash', 'null');
+     }
+    }
   //FUNCTIONAL
   public function getSession($id)
   {
@@ -109,6 +134,8 @@ class General_model extends CI_Model
         'address_city' => $account->address_city,
         'address_province' => $account->address_province,
         'address_postal' => $account->address_postal,
+        'city_id' => $account->city_id,
+        'province_id' => $account->province_id
        );
     } elseif ($account->role=='client') {
       $session = array(
@@ -160,6 +187,16 @@ class General_model extends CI_Model
     error_reporting(0);
   }
 
+
+  public function getCity()
+  {
+    return $this->callRajaOngkirAPI('city');
+  }
+
+  public function getCityDetail($city_id)
+  {
+    return $this->callRajaOngkirAPI('city?id='.$city_id);
+  }
   //APPLICATION
   public function cShopPage($keyword, $page)
   {
@@ -186,6 +223,7 @@ class General_model extends CI_Model
 
   public function cProfile()
   {
+    $data['origin'] = $this->getCity();
     $data['view_name'] = 'profile';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
@@ -199,6 +237,22 @@ class General_model extends CI_Model
     $this->db->update('account', $data);
     if ($this->session->userdata['role']=='admin') {$this->updateData('admin', 'id', $this->session->userdata['id'],'phone_number',$this->input->post('phone_number'));}
     notify('Update Berhasil', 'Proses pembaharuan akun '.$this->session->userdata['fullname'].' berhasil','success','fas fa-smile-wink',null);
+    if ($this->session->userdata['role']=='merchant') {
+      $cityDetail = $this->getCityDetail($this->input->post('city_id'));
+      $data = array(
+        'phone_number' => $this->input->post('phone_number'),
+        'idc_number' => $this->input->post('idc_number'),
+        'name' => $this->input->post('name'),
+        'address_street' => $this->input->post('address_street'),
+        'address_city' => $cityDetail->type.' '.$cityDetail->city_name,
+        'address_province' => $cityDetail->province,
+        'address_postal' => $cityDetail->postal_code,
+        'city_id' => $this->input->post('city_id'),
+        'province_id' => $cityDetail->province_id
+       );
+       $this->db->where($where = array('id' => $this->session->userdata['id'] ));
+       $this->db->update('merchant', $data);
+    }
     return $this->getSession($this->session->userdata['id']);
   }
 

@@ -21,9 +21,9 @@ class Client extends CI_Controller
     $this->load->view('template', $this->client_model->cMyCart());
   }
 
-  public function goToPayment($id)
+  public function StatusOrder($id)
   {
-    $this->load->view('template', $this->client_model->cGoToPayment($id));
+    $this->load->view('template', $this->client_model->cStatusOrder($id));
   }
 }
 

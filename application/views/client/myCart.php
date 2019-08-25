@@ -6,7 +6,7 @@
       </div>
       <div class="ml-md-auto py-2 py-md-0">
         <form  method="post">
-          <a href="<?php echo base_url('goToPayment/'.$order->id); ?>" class="btn btn-success btn-round">Lanjutkan Ke Pembayaran</a>
+          <a href="<?php echo base_url('StatusOrder/'.$order->id); ?>" class="btn btn-success btn-round">Lanjutkan Ke Pembayaran</a>
         </form>
       </div>
     </div>
