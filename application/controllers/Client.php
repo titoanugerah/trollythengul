@@ -29,6 +29,12 @@ class Client extends CI_Controller
     elseif ($this->input->post('uploadPayment')) {$this->client_model->uploadPayment($id);}
     $this->load->view('template', $this->client_model->cPayment($id));
   }
+
+  public function myOrder()
+  {
+    $this->load->view('template', $this->client_model->cMyOrder());
+
+  }
 }
 
 

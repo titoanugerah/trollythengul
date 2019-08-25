@@ -227,7 +227,9 @@ class Client_model extends CI_Model
     foreach ($this->getSomeData('view_detail_order', 'id_order', $id) as $item) {
       $data = $this->getCost($item->merchant_city_id, $item->client_city_id, $item->weight, explode('/',$this->input->post('courier'))[0], explode('/',$this->input->post('courier'))[1]);
       $this->updateData('detail_order', 'id', $item->id, 'shipment_fee', $data['cost']);
+      $this->updateData('order', 'id', $id, 'type', $data['type']);
     }
+    notify('Berhasil diupdate', 'Lokasi pengiriman berhasil diupdate','success','fas fa-check',null);
   }
 
   public function addPromo($id)
@@ -247,12 +249,46 @@ class Client_model extends CI_Model
     }
   }
 
+  public function createLog($status, $code, $actor, $info = array())
+  {
+    if ($status==1 && $code=='a') {
+      $data = array(
+        'id_order' => $info['id_order'],
+        'id_detail_order' => $info['id_detail_order'],
+        'log' => $this->session->userdata['fullname'].' sebagai pembeli telah melakukan pembayaran via transfer dengan bukti <br> <img src="'.base_url('./assets/upload'.$info['payment_image']).'" style="max-width:300px;">'
+     );
+    }
+
+    $this->db->insert('log', $data);
+  }
 
   public function deletePromo($id)
   {
     $this->updateData('order', 'id', $id, 'promo_code', '');
     notify('Berhasil dihapus', 'Kode promo berhasil dihapus' ,'success','fas fa-check',null);
+  }
 
+  public function uploadPayment($id)
+  {
+    if($this->updateData('order', 'id', $id, 'payment_image', 'payment_'.$id.$this->uploadFile('payment_'.$id, 'jpg|jpeg|bmp|png')['ext'])){
+      $this->updateData('order','id', $id, 'status', 1);
+      foreach ($this->getSomeData('view_detail_order', 'id_order', $id) as $item) {
+      $data['id_order'] = $id;
+      $data['id_detail_order'] = $item->id;
+      $data['payment_image'] = $item->payment_image;
+      $this->createLog(1, 'a', $this->session->userdata['id'], $data);
+      $this->updateData('detail_order', 'id', $item->id, 'status', 1);
+    }
+    notify('Berhasil', 'Pengiriman bukti gambar berhasil dilakukan, selanjutnya silahkan anda bisa pantau pada halaman Pesanan Saya' ,'success','fas fa-check','myOrder');
+    }
+  }
+
+  public function cMyOrder()
+  {
+    $data['detailOrder'] = $this->getSomeData('view_detail_order', 'id_customer', $this->session->userdata['id']);
+    $data['view_name'] = 'myOrder';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
   }
 }
 

@@ -6,7 +6,14 @@
 </li>
 <li class="nav-item <?php if($view_name=='myCart'){echo 'active';} ?>">
   <a href="<?php echo base_url('myCart'); ?>">
-    <i class="fas fa-shopping-cart"></i>
+    <i class="fas fa-shopping-bag"></i>
     <p>Keranjang Saya</p>
+  </a>
+</li>
+
+<li class="nav-item <?php if($view_name=='myOrder'){echo 'active';} ?>">
+  <a href="<?php echo base_url('myOrder'); ?>">
+    <i class="fas fa-tags"></i>
+    <p>Pesanan Saya</p>
   </a>
 </li>
