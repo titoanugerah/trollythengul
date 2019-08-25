@@ -130,6 +130,19 @@ class Client_model extends CI_Model
     }
   }
   //functional
+  public function createLog($status, $code, $actor, $info = array())
+  {
+    if ($status==1 && $code=='a') {
+      $data = array(
+        'id_order' => $info['id_order'],
+        'id_detail_order' => $info['id_detail_order'],
+        'log' => $this->session->userdata['fullname'].' sebagai pembeli telah melakukan pembayaran via transfer dengan bukti <br> <img src="'.base_url('./assets/upload'.$info['payment_image']).'" style="max-width:300px;">'
+     );
+    }
+    $this->db->insert('log', $data);
+  }
+
+
   public function createCaptcha()
   {
     $data['A'] = rand(0,10);
@@ -247,19 +260,6 @@ class Client_model extends CI_Model
     } else {
       notify('Gagal', 'Kode yang anda masukan tidak tersedia, silahkan periksa kode promo anda', 'danger', 'fas fa-bell-slash', null);
     }
-  }
-
-  public function createLog($status, $code, $actor, $info = array())
-  {
-    if ($status==1 && $code=='a') {
-      $data = array(
-        'id_order' => $info['id_order'],
-        'id_detail_order' => $info['id_detail_order'],
-        'log' => $this->session->userdata['fullname'].' sebagai pembeli telah melakukan pembayaran via transfer dengan bukti <br> <img src="'.base_url('./assets/upload'.$info['payment_image']).'" style="max-width:300px;">'
-     );
-    }
-
-    $this->db->insert('log', $data);
   }
 
   public function deletePromo($id)

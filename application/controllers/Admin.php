@@ -47,6 +47,13 @@ class Admin extends CI_Controller
     $this->load->view('template', $this->admin_model->cDetailAccount($role,$id));
   }
 
+  public function paymentVerification()
+  {
+    if ($this->input->post('approvePayment')) {$this->admin_model->approvePayment();}
+    elseif ($this->input->post('approvePayment')) {$this->admin_model->approvePayment();}
+    $this->load->view('template', $this->admin_model->cPaymentVerification());
+  }
+
 }
 
 

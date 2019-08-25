@@ -97,6 +97,18 @@ class admin_model extends CI_Model
     error_reporting(0);
   }
 
+  public function createLog($status, $code, $actor, $info = array())
+  {
+    if ($status==2 && $code=='a') {
+      $data = array(
+        'id_order' => $info['id_order'],
+        'id_detail_order' => $info['id_detail_order'],
+        'log' => $this->session->userdata['fullname'].' sebagai admin telah melakukan verifikasi pembayaran'
+     );
+    }
+    $this->db->insert('log', $data);
+  }
+
   //APPLICATION
   public function cCategory()
   {
@@ -211,10 +223,10 @@ class admin_model extends CI_Model
 
   public function cDetailAccount($role,$id)
   {
-    $data['view_name'] = 'detailAccount'.ucfirst($role);
     $data['detail'] = $this->getDataRow('view_'.$role, 'id', $id);
     if ($role=='customer') {$data['order'] = $this->getSomeData('view_detail_order', 'id_customer', $id);$data['shipment'] = $this->db->query('select *, count(id) as shipment_count from view_detail_order where id_customer ='.$id.' group by shipment_street')->result();}
     elseif ($role=='merchant') {$data['order'] = $this->getSomeData('view_detail_order', 'id_merchant', $id);$data['shipment'] = $this->db->query('select shipment_province, count(id) as shipment_count from view_detail_order where id_merchant='.$id.' group by shipment_province')->result();}
+    $data['view_name'] = 'detailAccount'.ucfirst($role);
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
   }
@@ -240,6 +252,30 @@ class admin_model extends CI_Model
     {$this->updateData('account', 'id', $id, 'password', md5($newPassword)); notify('Sukses', 'Proses Reset Password akun berhasil dilakukan', 'success', 'fas fa-spinner',null); $this->sentEmail($account->email, $account->fullname, 'Reset Password Berhasil', $content);}
   }
 
+  public function cPaymentVerification()
+  {
+    $data['order'] = $this->db->query('select * from view_order where status=1 order by id desc')->result();
+    $data['view_name'] = 'paymentVerification';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+  }
+
+  public function approvePayment()
+  {
+    $order = $this->getDataRow('view_order', 'id', $this->input->post('id'));
+    $this->updateData('order', 'id', $this->input->post('id'), 'status', 2);
+    $content = "bersamaan dengan email ini kami informasikan bahwa pembayaran anda sudah diverifikasi oleh pihak admin, selanjutnya tunggulah konfirmasi dari penjual";
+    $content2 = "bersamaan dengan ini kami sampaikan bahwa terdapat 1 pesanan yang perlu dikonfirmasi, silahkan kunjugi website kami";
+    $this->sentEmail($order->email, $order->fullname, 'Pembayaran kamu telah diverifikasi', $content);
+    foreach ($this->getSomeData('view_detail_order', 'id_order', $order->id) as $item) {
+      $merchant = $this->getDataRow('view_merchant', 'id', $item->id_merchant);
+      $this->sentEmail($merchant->email, $merchant->fullname, 'Terdapat 1 pesanan menunggu konfirmasi', $content2);
+      $data['id_order'] = $order->id;
+      $data['id_detail_order'] = $item->id;
+      $this->createLog(2, a, 'admin', $data );
+    }
+
+  }
 
 }
 

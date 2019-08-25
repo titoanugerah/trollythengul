@@ -36,8 +36,15 @@
 
 <li class="nav-item <?php if($view_name=='account' || $view_name == 'detailAccountMerchant' || $view_name == 'detailAccountCustomer'){echo 'active';}  ?>">
   <a href="<?php echo base_url('account/1'); ?>">
-    <i class="far fa-user"></i>
+    <i class="fas fa-user"></i>
     <p>Akun</p>
+  </a>
+</li>
+
+<li class="nav-item <?php if($view_name=='paymentVerification'){echo 'active';}  ?>">
+  <a href="<?php echo base_url('paymentVerification'); ?>">
+    <i class="fas fa-check"></i>
+    <p>Verifikasi Pembayaran</p>
   </a>
 </li>
 
