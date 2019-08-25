@@ -70,86 +70,86 @@ class General_model extends CI_Model
   }
 
 
-    public function callRajaOngkirAPI($param)
-    {
-      $curl = curl_init();
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/".$param,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-          "key: 585ef1d017b0c127167d9350ad10d026"
-        ),
-      ));
-      $response = json_decode(curl_exec($curl))->rajaongkir;
-      $err = curl_error($curl);
-      if ($response->status->description=='OK') {
-        return $response->results;
-     } else {
-       notify('Gagal', 'Gagal mengambil lokasi dari API : '.curl_error($curl).$response->status->description, 'danger', 'fas fa-bell-slash', 'null');
-     }
+  public function callRajaOngkirAPI($param)
+  {
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://api.rajaongkir.com/starter/".$param,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "GET",
+    CURLOPT_HTTPHEADER => array(
+    "key: 585ef1d017b0c127167d9350ad10d026"
+    ),
+    ));
+    $response = json_decode(curl_exec($curl))->rajaongkir;
+    $err = curl_error($curl);
+    if ($response->status->description=='OK') {
+      return $response->results;
+    } else {
+      notify('Gagal', 'Gagal mengambil lokasi dari API : '.curl_error($curl).$response->status->description, 'danger', 'fas fa-bell-slash', 'null');
     }
+  }
   //FUNCTIONAL
   public function getSession($id)
   {
     $account = $this->getDataRow('view_'.$this->getDataRow('account', 'id', $id)->role, 'id', $id);
-//    var_dump($account);die;
+    //    var_dump($account);die;
     if ($account->role=='admin') {
       $session = array(
-        'login' => true,
-        'id' => $account->id,
-        'username' => $account->username,
-        'password' => $account->password,
-        'fullname' => $account->fullname,
-        'email' => $account->email,
-        'role' => $account->role,
-        'status' => $account->status,
-        'join_date' => $account->join_date,
-        'phone_number' => $account->phone_number,
-        'idc_number' => $account->idc_number,
-        'idc_picture' => $account->idc_picture,
-        'display_picture' => $account->display_picture,
-       );
+      'login' => true,
+      'id' => $account->id,
+      'username' => $account->username,
+      'password' => $account->password,
+      'fullname' => $account->fullname,
+      'email' => $account->email,
+      'role' => $account->role,
+      'status' => $account->status,
+      'join_date' => $account->join_date,
+      'phone_number' => $account->phone_number,
+      'idc_number' => $account->idc_number,
+      'idc_picture' => $account->idc_picture,
+      'display_picture' => $account->display_picture,
+      );
     } elseif ($account->role=='merchant') {
       $session = array(
-        'login' => true,
-        'id' => $account->id,
-        'username' => $account->username,
-        'password' => $account->password,
-        'fullname' => $account->fullname,
-        'email' => $account->email,
-        'role' => $account->role,
-        'status' => $account->status,
-        'join_date' => $account->join_date,
-        'phone_number' => $account->phone_number,
-        'idc_number' => $account->idc_number,
-        'idc_picture' => $account->idc_picture,
-        'display_picture' => $account->display_picture,
-        'merchant' => $account->merchant,
-        'address_street' => $account->address_street,
-        'address_city' => $account->address_city,
-        'address_province' => $account->address_province,
-        'address_postal' => $account->address_postal,
-        'city_id' => $account->city_id,
-        'province_id' => $account->province_id
-       );
+      'login' => true,
+      'id' => $account->id,
+      'username' => $account->username,
+      'password' => $account->password,
+      'fullname' => $account->fullname,
+      'email' => $account->email,
+      'role' => $account->role,
+      'status' => $account->status,
+      'join_date' => $account->join_date,
+      'phone_number' => $account->phone_number,
+      'idc_number' => $account->idc_number,
+      'idc_picture' => $account->idc_picture,
+      'display_picture' => $account->display_picture,
+      'merchant' => $account->merchant,
+      'address_street' => $account->address_street,
+      'address_city' => $account->address_city,
+      'address_province' => $account->address_province,
+      'address_postal' => $account->address_postal,
+      'city_id' => $account->city_id,
+      'province_id' => $account->province_id
+      );
     } elseif ($account->role=='client') {
       $session = array(
-        'login' => true,
-        'id' => $account->id,
-        'username' => $account->username,
-        'password' => $account->password,
-        'fullname' => $account->fullname,
-        'email' => $account->email,
-        'role' => $account->role,
-        'status' => $account->status,
-        'join_date' => $account->join_date,
-        'display_picture' => $account->display_picture,
-       );
+      'login' => true,
+      'id' => $account->id,
+      'username' => $account->username,
+      'password' => $account->password,
+      'fullname' => $account->fullname,
+      'email' => $account->email,
+      'role' => $account->role,
+      'status' => $account->status,
+      'join_date' => $account->join_date,
+      'display_picture' => $account->display_picture,
+      );
     }
 
     return $session;
@@ -159,15 +159,15 @@ class General_model extends CI_Model
   {
     $account = $this->getDataRow('webconf', 'id', 1);
     $config = [
-      'protocol' => 'sentmail',
-      'smtp_host' => $account->host,
-      'smtp_user' => $account->email,
-      'smtp_pass' => $account->password,
-      'smtp_crypto' => $account->crypto,
-      'charset' => 'utf-8',
-      'crlf' => 'rn',
-      'newline' => "\r\n",
-      'smtp_port' => $account->port
+    'protocol' => 'sentmail',
+    'smtp_host' => $account->host,
+    'smtp_user' => $account->email,
+    'smtp_pass' => $account->password,
+    'smtp_crypto' => $account->crypto,
+    'charset' => 'utf-8',
+    'crlf' => 'rn',
+    'newline' => "\r\n",
+    'smtp_port' => $account->port
     ];
     $this->load->library('email', $config);
     $this->email->from($account->email);
@@ -240,18 +240,18 @@ class General_model extends CI_Model
     if ($this->session->userdata['role']=='merchant') {
       $cityDetail = $this->getCityDetail($this->input->post('city_id'));
       $data = array(
-        'phone_number' => $this->input->post('phone_number'),
-        'idc_number' => $this->input->post('idc_number'),
-        'name' => $this->input->post('name'),
-        'address_street' => $this->input->post('address_street'),
-        'address_city' => $cityDetail->type.' '.$cityDetail->city_name,
-        'address_province' => $cityDetail->province,
-        'address_postal' => $cityDetail->postal_code,
-        'city_id' => $this->input->post('city_id'),
-        'province_id' => $cityDetail->province_id
-       );
-       $this->db->where($where = array('id' => $this->session->userdata['id'] ));
-       $this->db->update('merchant', $data);
+      'phone_number' => $this->input->post('phone_number'),
+      'idc_number' => $this->input->post('idc_number'),
+      'name' => $this->input->post('name'),
+      'address_street' => $this->input->post('address_street'),
+      'address_city' => $cityDetail->type.' '.$cityDetail->city_name,
+      'address_province' => $cityDetail->province,
+      'address_postal' => $cityDetail->postal_code,
+      'city_id' => $this->input->post('city_id'),
+      'province_id' => $cityDetail->province_id
+      );
+      $this->db->where($where = array('id' => $this->session->userdata['id'] ));
+      $this->db->update('merchant', $data);
     }
     return $this->getSession($this->session->userdata['id']);
   }
@@ -300,28 +300,28 @@ class General_model extends CI_Model
     } else {
       $newPassword = rand(1000000,9999999);
       $data = array(
-        'username' => $this->input->post('username'),
-        'password' => md5($newPassword),
-        'email' => $this->input->post('email'),
-        'fullname' => $this->input->post('username'),
-        'role' => $this->input->post('role'),
-        'status' => 1,
-        'display_picture' => 'no.jpg'
-       );
-       $this->db->insert('account', $data);
-       if ($this->input->post('role')=='merchant') {
-         $this->db->insert('merchant', $data = array('id' => $this->db->insert_id()));
-       }
-       $content = 'Akun anda berhasil dibuat silahkan login menggunakan password '.$newPassword;
-       $this->sentEmail($this->input->post('email'), $this->input->post('username'), 'Selamat Datang Pengguna Baru', $content);
-       notify('Berhasil', 'Akun anda berhasil dibuat, silahkan cek email anda untuk mendapatkan password','success','fas fa-smile-wink','login');
+      'username' => $this->input->post('username'),
+      'password' => md5($newPassword),
+      'email' => $this->input->post('email'),
+      'fullname' => $this->input->post('username'),
+      'role' => $this->input->post('role'),
+      'status' => 1,
+      'display_picture' => 'no.jpg'
+      );
+      $this->db->insert('account', $data);
+      if ($this->input->post('role')=='merchant') {
+        $this->db->insert('merchant', $data = array('id' => $this->db->insert_id()));
+      }
+      $content = 'Akun anda berhasil dibuat silahkan login menggunakan password '.$newPassword;
+      $this->sentEmail($this->input->post('email'), $this->input->post('username'), 'Selamat Datang Pengguna Baru', $content);
+      notify('Berhasil', 'Akun anda berhasil dibuat, silahkan cek email anda untuk mendapatkan password','success','fas fa-smile-wink','login');
     }
 
   }
 
   public function cDashboard()
   {
-//    if ($this->session->userdata['role']=='merchant') {}
+    //    if ($this->session->userdata['role']=='merchant') {}
     $data['view_name'] = 'no';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;

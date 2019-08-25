@@ -94,7 +94,7 @@
                   <option value="<?php echo $item->city_id ?>" <?php if($item->city_id==$this->session->userdata['city_id']){echo 'selected';} ?>><?php echo $item->type.'  '.$item->city_name.', '.$item->province; ?></option>
                 <?php endforeach; ?>
               </select>
-            </div>
+            </div>            
           </div>
         </div>
         <div class="card-footer">

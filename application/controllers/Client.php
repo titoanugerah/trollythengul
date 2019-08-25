@@ -23,6 +23,7 @@ class Client extends CI_Controller
 
   public function StatusOrder($id)
   {
+    if ($this->input->post('setDestination')) {$this->client_model->setDestination($id);}
     $this->load->view('template', $this->client_model->cStatusOrder($id));
   }
 }

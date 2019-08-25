@@ -23,7 +23,7 @@
 <div class="tab-content mt-2 mb-3" >
   <div class="tab-pane fade show active" id="tab1" role="tabpanel" >
     <div class="col-md-12 row">
-      <div class="col-md-8">
+      <div class="col-md-7">
         <br>
         <?php foreach ($detailOrder as $item): ?>
           <div class="card">
@@ -56,7 +56,7 @@
           </div>
         <?php endforeach; ?>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <br>
         <div class="card">
           <div class="card-header">
@@ -85,12 +85,40 @@
         </div>
         <div class="card">
           <div class="card-header">
-            lalala
+            Tujuan Pengiriman
           </div>
+          <form method="post">
           <div class="card-body">
-
-          <div data-theme="light" id="rajaongkir-widget"></div>
-        </div>
+            <div class="form-group">
+              <select class="select2basic form-control" name="city_id" style="width:360px">
+                <?php foreach ($destination as $item):?>
+                  <option value="<?php echo $item->city_id ?>" <?php if($item->city_id==$order->city_id){echo 'selected';} ?>><?php echo $item->type.'  '.$item->city_name.', '.$item->province; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Alamat Spesifik Pengiriman</label>
+              <textarea name="shipment_street" rows="4" cols="80" placeholder="Tuliskan alamat lengkap pada kolom ini" class="form-control"><?php echo $order->shipment_street; ?></textarea>
+            </div>
+            <div class="form-group col-4 col-md-4">
+              <label>Kurir Pengiriman</label> &nbsp;&nbsp;&nbsp;&nbsp;<br>
+              <select class="select2basic form-control" name="courier" style="width:360px">
+                  <option value="jne/0" <?php if($order->courier=="jne"){echo 'selected';} ?>>JNE - OKE</option>
+                  <option value="jne/1" <?php if($order->courier=="jne"){echo 'selected';} ?>>JNE - Reguler</option>
+                  <option value="jne/2" <?php if($order->courier=="jne"){echo 'selected';} ?>>JNE - SPS</option>
+                  <option value="jne/3" <?php if($order->courier=="jne"){echo 'selected';} ?>>JNE - YES</option>
+                  <option value="pos/0" <?php if($order->courier=="pos"){echo 'selected';} ?>>POS Indonesia - Kilat Khusus (1-2 Hari)</option>
+                  <option value="pos/1" <?php if($order->courier=="pos"){echo 'selected';} ?>>POS Indonesia - Express Next Day(1 Hari)</option>
+                  <option value="tiki/0" <?php if($order->courier=="tiki"){echo 'selected';} ?>>TIKI - ONS</option>
+                  <option value="tiki/1" <?php if($order->courier=="tiki"){echo 'selected';} ?>>TIKI - Reguler</option>
+                  <option value="tiki/2" <?php if($order->courier=="tiki"){echo 'selected';} ?>>TIKI - Economy</option>
+              </select>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" name="setDestination" value="setDestination" class="btn btn-success">Set Lokasi</button>
+          </div>
+        </form>
         </div>
       </div>
     </div>

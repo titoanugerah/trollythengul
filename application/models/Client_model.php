@@ -2,8 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- *
- */
+*
+*/
 class Client_model extends CI_Model
 {
 
@@ -74,7 +74,62 @@ class Client_model extends CI_Model
     return $upload;
   }
 
+  public function callRajaOngkirAPI($param)
+  {
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://api.rajaongkir.com/starter/".$param,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "GET",
+    CURLOPT_HTTPHEADER => array(
+    "key: 585ef1d017b0c127167d9350ad10d026"
+    ),
+    ));
+    $response = json_decode(curl_exec($curl))->rajaongkir;
+    $err = curl_error($curl);
+    if ($response->status->description=='OK') {
+      return $response->results;
+    } else {
+      notify('Gagal', 'Gagal mengambil lokasi dari API : '.curl_error($curl).$response->status->description, 'danger', 'fas fa-bell-slash', 'null');
+    }
+  }
 
+  public function getCost($origin, $destination, $weight, $courier, $type)
+  {
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_POSTFIELDS => "origin=".$origin."&destination=".$destination."&weight=".$weight."&courier=".$courier,
+      CURLOPT_HTTPHEADER => array(
+        "content-type: application/x-www-form-urlencoded",
+        "key: 585ef1d017b0c127167d9350ad10d026"
+      ),
+    ));
+
+    $response = json_decode(curl_exec($curl))->rajaongkir;
+   // var_dump($response->results[0]->name);die;
+    $data['cost'] = $response->results[0]->costs[$type]->cost[0]->value;
+    $data['etd'] = $response->results[0]->costs[$type]->cost[0]->etd;
+    $data['type'] = $response->results[0]->costs[$type]->service;
+    $data['courier_name'] = $response->results[0]->name;
+    $err = curl_error($curl);
+    if ($response->status->description=='OK') {
+      return $data;
+    } else {
+      notify('Gagal', 'Gagal mengambil lokasi dari API : '.curl_error($curl).$response->status->description, 'danger', 'fas fa-bell-slash', null);
+    }
+  }
+  //functional
   public function createCaptcha()
   {
     $data['A'] = rand(0,10);
@@ -83,23 +138,15 @@ class Client_model extends CI_Model
     return $data;
   }
 
+
   public function getCity()
   {
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-      CURLOPT_URL => "https://api.rajaongkir.com/starter/city",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => "",
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 30,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => "GET",
-      CURLOPT_HTTPHEADER => array(
-        "key: 585ef1d017b0c127167d9350ad10d026"
-      ),
-    ));
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
+    return $this->callRajaOngkirAPI('city');
+  }
+
+  public function getCityDetail($city_id)
+  {
+    return $this->callRajaOngkirAPI('city?id='.$city_id);
   }
 
   //APPLICATION
@@ -151,14 +198,40 @@ class Client_model extends CI_Model
   public function cStatusOrder($id)
   {
     $data['destination'] = $this->getCity();
-    $data['order'] =$this->getDataRow('view_order', 'id', $id);
+    $data['order'] = $this->getDataRow('view_order', 'id', $id);
     $data['detailOrder'] = $this->getSomeData('view_detail_order', 'id_order', $id);
     $data['view_name'] = 'StatusOrder';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
   }
 
+  public function setDestination($id)
+  {
+    $detailCity = $this->getCityDetail($this->input->post('city_id'));
+    $data = array(
+      'city_id' => $this->input->post('city_id'),
+      'shipment_street' => $this->input->post('shipment_street'),
+      'courier' => $this->input->post('courier'),
+      'shipment_city' => $detailCity->city_name,
+      'shipment_province' => $detailCity->province,
+      'shipment_postal_code' => $detailCity->postal_code
+     );
+     $this->db->where($where = array('id' => $id ));
+     $this->db->update('order', $data);
+    $this->updateData('order', 'id', $id, 'city_id', $this->input->post('city_id'));
+    $this->updateData('order', 'id', $id, 'shipment_street', $this->input->post('shipment_street'));
+    $this->updateData('order', 'id', $id, 'courier', $this->input->post('courier'));
+
+    foreach ($this->getSomeData('view_detail_order', 'id_order', $id) as $item) {
+      $data = $this->getCost($item->merchant_city_id, $item->client_city_id, $item->weight, explode('/',$this->input->post('courier'))[0], explode('/',$this->input->post('courier'))[1]);
+      // var_dump($data['cost']);
+    // var_dump(explode('/',$this->input->post('courier'))[0]);die;
+//      var_dump($this->getCost($item->merchant_city_id, $item->client_city_id, $item->weight, explode('/',$this->input->post('courier'))[0], explode('/',$this->input->post('courier'))[1]) );die;
+     $this->updateData('detail_order', 'id', $item->id, 'shipment_fee', $data['cost']);
+    }
+  }
+
 }
 
 
- ?>
+?>
