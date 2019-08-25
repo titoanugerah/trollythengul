@@ -102,22 +102,22 @@ class Client_model extends CI_Model
   {
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => "",
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 30,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => "POST",
-      CURLOPT_POSTFIELDS => "origin=".$origin."&destination=".$destination."&weight=".$weight."&courier=".$courier,
-      CURLOPT_HTTPHEADER => array(
-        "content-type: application/x-www-form-urlencoded",
-        "key: 585ef1d017b0c127167d9350ad10d026"
-      ),
+    CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "origin=".$origin."&destination=".$destination."&weight=".$weight."&courier=".$courier,
+    CURLOPT_HTTPHEADER => array(
+    "content-type: application/x-www-form-urlencoded",
+    "key: 585ef1d017b0c127167d9350ad10d026"
+    ),
     ));
 
     $response = json_decode(curl_exec($curl))->rajaongkir;
-   // var_dump($response->results[0]->name);die;
+    // var_dump($response->results[0]->name);die;
     $data['cost'] = $response->results[0]->costs[$type]->cost[0]->value;
     $data['etd'] = $response->results[0]->costs[$type]->cost[0]->etd;
     $data['type'] = $response->results[0]->costs[$type]->service;
@@ -171,7 +171,7 @@ class Client_model extends CI_Model
   public function addToCart($id)
   {
     if ($this->getNumRow2('order', 'id_customer', $this->session->userdata['id'], 'status', 0)==0) {
-      $this->db->insert('order',$content = array('id_customer' => $this->session->userdata['id'], 'status' => 0));
+      $this->db->insert('order',$content = array('id_customer' => $this->session->userdata['id'], 'status' => 0, 'unique' => rand(0,999)));
       $id_order = $this->db->insert_id();
     } else {
       $id_order = $this->getDataRow('order', 'id_customer', $this->session->userdata['id'], 'status', 0)->id;
@@ -195,12 +195,14 @@ class Client_model extends CI_Model
     notify('Berhasil diupdate', 'Barang berhasil diupdate dari keranjang','success','fas fa-check','myCart');
   }
 
-  public function cStatusOrder($id)
+  public function cPayment($id)
   {
     $data['destination'] = $this->getCity();
     $data['order'] = $this->getDataRow('view_order', 'id', $id);
+    $data['promo'] = $this->getDataRow('view_promo', 'promo_code', $data['order']->promo_code);
+    // var_dump($data['promo']);die;
     $data['detailOrder'] = $this->getSomeData('view_detail_order', 'id_order', $id);
-    $data['view_name'] = 'StatusOrder';
+    $data['view_name'] = 'payment';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
   }
@@ -209,28 +211,49 @@ class Client_model extends CI_Model
   {
     $detailCity = $this->getCityDetail($this->input->post('city_id'));
     $data = array(
-      'city_id' => $this->input->post('city_id'),
-      'shipment_street' => $this->input->post('shipment_street'),
-      'courier' => $this->input->post('courier'),
-      'shipment_city' => $detailCity->city_name,
-      'shipment_province' => $detailCity->province,
-      'shipment_postal_code' => $detailCity->postal_code
-     );
-     $this->db->where($where = array('id' => $id ));
-     $this->db->update('order', $data);
+    'city_id' => $this->input->post('city_id'),
+    'shipment_street' => $this->input->post('shipment_street'),
+    'courier' => $this->input->post('courier'),
+    'shipment_city' => $detailCity->city_name,
+    'shipment_province' => $detailCity->province,
+    'shipment_postal_code' => $detailCity->postal_code
+    );
+    $this->db->where($where = array('id' => $id ));
+    $this->db->update('order', $data);
     $this->updateData('order', 'id', $id, 'city_id', $this->input->post('city_id'));
     $this->updateData('order', 'id', $id, 'shipment_street', $this->input->post('shipment_street'));
     $this->updateData('order', 'id', $id, 'courier', $this->input->post('courier'));
 
     foreach ($this->getSomeData('view_detail_order', 'id_order', $id) as $item) {
       $data = $this->getCost($item->merchant_city_id, $item->client_city_id, $item->weight, explode('/',$this->input->post('courier'))[0], explode('/',$this->input->post('courier'))[1]);
-      // var_dump($data['cost']);
-    // var_dump(explode('/',$this->input->post('courier'))[0]);die;
-//      var_dump($this->getCost($item->merchant_city_id, $item->client_city_id, $item->weight, explode('/',$this->input->post('courier'))[0], explode('/',$this->input->post('courier'))[1]) );die;
-     $this->updateData('detail_order', 'id', $item->id, 'shipment_fee', $data['cost']);
+      $this->updateData('detail_order', 'id', $item->id, 'shipment_fee', $data['cost']);
     }
   }
 
+  public function addPromo($id)
+  {
+    if ($this->getNumRow('promo', 'promo_code', $this->input->post('promo_code'))==1) {
+      $promo = $this->getDataRow('view_promo', 'promo_code', $this->input->post('promo_code'));
+      if ($promo->available<1) {
+        notify('Gagal', 'Kuota pada promo ini sudah habis, silahkan masukan kode promo lain', 'danger', 'fas fa-bell-slash', null);
+      } elseif ($promo->deadline<1 || $promo->status==0) {
+        notify('Gagal', 'Kuota pada promo ini sudah kadaluarsa, silahkan masukan kode promo lain', 'danger', 'fas fa-bell-slash', null);
+      } else {
+        $this->updateData('order', 'id', $id, 'promo_code', $this->input->post('promo_code'));
+        notify('Berhasil ditambahkan', 'Kode promo '.$this->input->post('promo').' berhasil ditambahkan, selamat menikmati potongan harga senilai '.number_format($promo->discount,2,',','.') ,'success','fas fa-check',null);
+      }
+    } else {
+      notify('Gagal', 'Kode yang anda masukan tidak tersedia, silahkan periksa kode promo anda', 'danger', 'fas fa-bell-slash', null);
+    }
+  }
+
+
+  public function deletePromo($id)
+  {
+    $this->updateData('order', 'id', $id, 'promo_code', '');
+    notify('Berhasil dihapus', 'Kode promo berhasil dihapus' ,'success','fas fa-check',null);
+
+  }
 }
 
 

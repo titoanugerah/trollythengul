@@ -21,10 +21,13 @@ class Client extends CI_Controller
     $this->load->view('template', $this->client_model->cMyCart());
   }
 
-  public function StatusOrder($id)
+  public function payment($id)
   {
     if ($this->input->post('setDestination')) {$this->client_model->setDestination($id);}
-    $this->load->view('template', $this->client_model->cStatusOrder($id));
+    elseif ($this->input->post('addPromo')) {$this->client_model->addPromo($id);}
+    elseif ($this->input->post('deletePromo')) {$this->client_model->deletePromo($id);}
+    elseif ($this->input->post('uploadPayment')) {$this->client_model->uploadPayment($id);}
+    $this->load->view('template', $this->client_model->cPayment($id));
   }
 }
 

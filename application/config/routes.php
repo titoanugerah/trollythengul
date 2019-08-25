@@ -24,4 +24,5 @@ $route['addProduct'] = 'merchant/addProduct';
 $route['setDefaultImage/(:any)/(:any)'] = 'merchant/setDefaultImage/$1/$2';
 //CLIENT AREA
 $route['myCart'] = 'client/myCart';
+$route['payment/(:any)'] = 'client/payment/$1';
 $route['StatusOrder/(:any)'] = 'client/StatusOrder/$1';
