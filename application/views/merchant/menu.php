@@ -23,3 +23,12 @@
     </a>
   </li>
 </li>
+
+<li class="nav-item <?php if($view_name=='order'){echo 'active';} ?>">
+  <li class="nav-item <?php if($view_name=='order'){echo 'active';} ?>">
+    <a href="<?php echo base_url('order'); ?>">
+      <i class="fas fa-tasks"></i>
+        <p>Pesanan</p>
+    </a>
+  </li>
+</li>

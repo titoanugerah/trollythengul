@@ -34,5 +34,13 @@ class Merchant extends CI_Controller
   {
     $this->merchant_model->setDefaultImage($id_product, $id_attachment);
   }
+
+  public function order()
+  {
+    if($this->input->post('acceptOrder')){$this->merchant_model->acceptOrder();}
+    if($this->input->post('declineOrder')){$this->merchant_model->acceptOrder();}
+    if($this->input->post('confirmSent')){$this->merchant_model->confirmSent();}
+    $this->load->view('template', $this->merchant_model->cOrder());
+  }
 }
 ?>

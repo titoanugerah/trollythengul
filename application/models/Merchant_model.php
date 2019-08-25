@@ -79,65 +79,33 @@ class Merchant_model extends CI_Model
     return $data;
   }
   //FUNCTIONAL
-  public function getSession($id)
-  {
-    $account = $this->getDataRow('view_'.$this->getDataRow('account', 'id', $id)->role, 'id', $id);
-//    var_dump($account);die;
-    if ($account->role=='admin') {
-      $session = array(
-        'login' => true,
-        'id' => $account->id,
-        'username' => $account->username,
-        'password' => $account->password,
-        'fullname' => $account->fullname,
-        'email' => $account->email,
-        'role' => $account->role,
-        'status' => $account->status,
-        'join_date' => $account->join_date,
-        'phone_number' => $account->phone_number,
-        'idc_number' => $account->idc_number,
-        'idc_picture' => $account->idc_picture,
-        'display_picture' => $account->display_picture,
-       );
-    } elseif ($account->role=='merchant') {
-      $session = array(
-        'login' => true,
-        'id' => $account->id,
-        'username' => $account->username,
-        'password' => $account->password,
-        'fullname' => $account->fullname,
-        'email' => $account->email,
-        'role' => $account->role,
-        'status' => $account->status,
-        'join_date' => $account->join_date,
-        'phone_number' => $account->phone_number,
-        'idc_number' => $account->idc_number,
-        'idc_picture' => $account->idc_picture,
-        'display_picture' => $account->display_picture,
-        'merchant' => $account->merchant,
-        'address_street' => $account->address_street,
-        'address_city' => $account->address_city,
-        'address_province' => $account->address_province,
-        'address_postal' => $account->address_postal,
-       );
-    }
 
-    return $session;
+  public function createLog($status, $code, $actor, $info = array())
+  {
+    if ($status==3 && $code=='a') {
+      $data = array(
+      'id_order' => $info['id_order'],
+      'id_detail_order' => $info['id_detail_order'],
+      'log' => $this->session->userdata['merchant'].' sebagai admin telah melakukan mengkonfirmasi pemesanan'
+      );
+    }
+    $this->db->insert('log', $data);
   }
+
 
   public function sentEmail($to, $fullname, $subject, $content)
   {
     $account = $this->getDataRow('webconf', 'id', 1);
     $config = [
-      'protocol' => 'sentmail',
-      'smtp_host' => $account->host,
-      'smtp_user' => $account->email,
-      'smtp_pass' => $account->password,
-      'smtp_crypto' => $account->crypto,
-      'charset' => 'utf-8',
-      'crlf' => 'rn',
-      'newline' => "\r\n",
-      'smtp_port' => $account->port
+    'protocol' => 'sentmail',
+    'smtp_host' => $account->host,
+    'smtp_user' => $account->email,
+    'smtp_pass' => $account->password,
+    'smtp_crypto' => $account->crypto,
+    'charset' => 'utf-8',
+    'crlf' => 'rn',
+    'newline' => "\r\n",
+    'smtp_port' => $account->port
     ];
     $this->load->library('email', $config);
     $this->email->from($account->email);
@@ -206,20 +174,20 @@ class Merchant_model extends CI_Model
   public function addProduct()
   {
     $data = array(
-      'name' => $this->input->post('name'),
-      'id_category' => $this->input->post('id_category'),
-      'price' => $this->input->post('price'),
-      'description' => $this->input->post('description'),
-      'weight' => $this->input->post('weight'),
-      'size_length' => $this->input->post('size_length'),
-      'size_width' => $this->input->post('size_width'),
-      'size_height' => $this->input->post('size_height'),
-      'id_merchant' => $this->session->userdata['id'],
-      'status' => 1,
-      'id_attachment' => 'no.jpg'
-     );
-     $this->db->insert('product', $data);
-     notify('Sukses', 'Proses penambahan berhasil dilakukan, silahkan tambahkan gambar pada kolom gambar', 'success', 'fas fa-plus', 'detailMyProduct/'.$this->db->insert_id());
+    'name' => $this->input->post('name'),
+    'id_category' => $this->input->post('id_category'),
+    'price' => $this->input->post('price'),
+    'description' => $this->input->post('description'),
+    'weight' => $this->input->post('weight'),
+    'size_length' => $this->input->post('size_length'),
+    'size_width' => $this->input->post('size_width'),
+    'size_height' => $this->input->post('size_height'),
+    'id_merchant' => $this->session->userdata['id'],
+    'status' => 1,
+    'id_attachment' => 'no.jpg'
+    );
+    $this->db->insert('product', $data);
+    notify('Sukses', 'Proses penambahan berhasil dilakukan, silahkan tambahkan gambar pada kolom gambar', 'success', 'fas fa-plus', 'detailMyProduct/'.$this->db->insert_id());
   }
 
   public function addImage($id)
@@ -255,18 +223,38 @@ class Merchant_model extends CI_Model
   public function updateProduct($id)
   {
     $data = array(
-      'name' => $this->input->post('name'),
-      'id_category' => $this->input->post('id_category'),
-      'price' => $this->input->post('price'),
-      'description' => $this->input->post('description'),
-      'weight' => $this->input->post('weight'),
-      'size_length' => $this->input->post('size_length'),
-      'size_width' => $this->input->post('size_width'),
-      'size_height' => $this->input->post('size_height'),
-     );
-     $this->db->where($where = array('id' => $id ));
-     $this->db->update('product', $data);
+    'name' => $this->input->post('name'),
+    'id_category' => $this->input->post('id_category'),
+    'price' => $this->input->post('price'),
+    'description' => $this->input->post('description'),
+    'weight' => $this->input->post('weight'),
+    'size_length' => $this->input->post('size_length'),
+    'size_width' => $this->input->post('size_width'),
+    'size_height' => $this->input->post('size_height'),
+    );
+    $this->db->where($where = array('id' => $id ));
+    $this->db->update('product', $data);
+  }
+
+  public function cOrder()
+  {
+    $data['order'] = $this->getSomeData('view_detail_order', 'id_merchant', $this->session->userdata['id']);
+    $data['view_name'] = 'order';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+  }
+
+  public function acceptOrder()
+  {
+    $this->updateData('detail_order', 'id', $this->input->post('id'), 'status', 3);
+    $order = $this->getDataRow('view_detail_order', 'id', $this->input->post('id'));
+    $content = 'Bersamaan dengan email ini kami sampaikan bahwa terkait pesananan '.$this->input->post('product').', pihak toko telah mengkonfirmasi pesanan anda ';
+    $this->sentEmail($order->email, $order->fullname, 'Pesanan anda sudah dikonfirmasi toko', $content);
+    $data['id_detail_order'] = $this->input->post('id');
+    $data['id_order'] = $order->id_order;
+    $this->createLog(3,'a', $this->session->userdata['merchant'], $data);
+    notify('Sukses', 'Pesanan sudah dikonfirmasi', 'success', 'fas fa-plus', 'order');
   }
 }
 
- ?>
+?>
