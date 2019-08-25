@@ -134,10 +134,10 @@ class Client_model extends CI_Model
   {
     if ($status==1 && $code=='a') {
       $data = array(
-        'id_order' => $info['id_order'],
-        'id_detail_order' => $info['id_detail_order'],
-        'log' => $this->session->userdata['fullname'].' sebagai pembeli telah melakukan pembayaran via transfer dengan bukti <br> <img src="'.base_url('./assets/upload'.$info['payment_image']).'" style="max-width:300px;">'
-     );
+      'id_order' => $info['id_order'],
+      'id_detail_order' => $info['id_detail_order'],
+      'log' => $this->session->userdata['fullname'].' sebagai pembeli telah melakukan pembayaran via transfer dengan bukti <br> <img src="'.base_url('./assets/upload'.$info['payment_image']).'" style="max-width:300px;">'
+      );
     }
     $this->db->insert('log', $data);
   }
@@ -273,13 +273,13 @@ class Client_model extends CI_Model
     if($this->updateData('order', 'id', $id, 'payment_image', 'payment_'.$id.$this->uploadFile('payment_'.$id, 'jpg|jpeg|bmp|png')['ext'])){
       $this->updateData('order','id', $id, 'status', 1);
       foreach ($this->getSomeData('view_detail_order', 'id_order', $id) as $item) {
-      $data['id_order'] = $id;
-      $data['id_detail_order'] = $item->id;
-      $data['payment_image'] = $item->payment_image;
-      $this->createLog(1, 'a', $this->session->userdata['id'], $data);
-      $this->updateData('detail_order', 'id', $item->id, 'status', 1);
-    }
-    notify('Berhasil', 'Pengiriman bukti gambar berhasil dilakukan, selanjutnya silahkan anda bisa pantau pada halaman Pesanan Saya' ,'success','fas fa-check','myOrder');
+        $data['id_order'] = $id;
+        $data['id_detail_order'] = $item->id;
+        $data['payment_image'] = $item->payment_image;
+        $this->createLog(1, 'a', $this->session->userdata['id'], $data);
+        $this->updateData('detail_order', 'id', $item->id, 'status', 1);
+      }
+      notify('Berhasil', 'Pengiriman bukti gambar berhasil dilakukan, selanjutnya silahkan anda bisa pantau pada halaman Pesanan Saya' ,'success','fas fa-check','myOrder');
     }
   }
 
@@ -289,6 +289,22 @@ class Client_model extends CI_Model
     $data['view_name'] = 'myOrder';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
+  }
+
+  public function confirmArrived()
+  {
+    $data = array(
+    'status' => 5,
+    'comment' => $this->input->post('comment'),
+    'rating' => $this->input->post('rating'),
+    );
+    $this->db->where($where = array('id' => $this->input->post('id')));
+    $this->db->update('detail_order', $data);
+    $detail_order= $this->getDataRow('detail_order', 'id', $this->input->post('id'));
+    $content = 'Bersamaan dengan ini kami informasikan bahwa pesanan #'.$detail_order->id.' sudah diterima oleh pembeli';
+    $this->sentEmail($this->getDataRow('account', 'id', $detail_order->id)->email, $this->getDataRow('account', 'id', $detail_order->id)->fullname, 'Barang sudah sampai', $content);
+    notify('Berhasil', 'Barang sudah diterima' ,'success','fas fa-check','myOrder');
+
   }
 }
 

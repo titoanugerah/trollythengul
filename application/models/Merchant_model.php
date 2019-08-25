@@ -86,7 +86,13 @@ class Merchant_model extends CI_Model
       $data = array(
       'id_order' => $info['id_order'],
       'id_detail_order' => $info['id_detail_order'],
-      'log' => $this->session->userdata['merchant'].' sebagai admin telah melakukan mengkonfirmasi pemesanan'
+      'log' => $this->session->userdata['merchant'].' sebagai toko telah melakukan mengkonfirmasi pemesanan'
+      );
+    } elseif ($status==4 && $code=='a') {
+      $data = array(
+      'id_order' => $info['id_order'],
+      'id_detail_order' => $info['id_detail_order'],
+      'log' => $this->session->userdata['merchant'].' sebagai toko telah melakukan mengirimkan pesanan anda melalui kurir '.$info['courier'].' dengan nomor resi '.$info['awb']
       );
     }
     $this->db->insert('log', $data);
@@ -254,6 +260,22 @@ class Merchant_model extends CI_Model
     $data['id_order'] = $order->id_order;
     $this->createLog(3,'a', $this->session->userdata['merchant'], $data);
     notify('Sukses', 'Pesanan sudah dikonfirmasi', 'success', 'fas fa-plus', 'order');
+  }
+
+  public function confirmSent()
+  {
+    $this->updateData('detail_order', 'id', $this->input->post('id'), 'status', 4);
+    $this->updateData('detail_order', 'id', $this->input->post('id'), 'awb', $this->input->post('awb'));
+    $order = $this->getDataRow('view_detail_order', 'id', $this->input->post('id'));
+    $content = 'Bersamaan dengan email ini kami sampaikan bahwa terkait pesananan '.$this->input->post('product').', pihak toko telah mengirimkan pesanan anda melalui '.explode($order->courier,'/')[0].' - '.$order->type.' dengan nomor resi '.$this->input->post('awb');
+    $this->sentEmail($order->email, $order->fullname, 'Pesanan anda sudah dikirim oleh toko dengan nomor resi '.$this->input->post('awb'), $content);
+    $data['id_detail_order'] = $this->input->post('id');
+    $data['id_order'] = $order->id_order;
+    $data['awb'] = $this->input->post('awb');
+    $data['courier'] = explode($order->courier,'/')[0];
+    $this->createLog(4,'a', $this->session->userdata['merchant'], $data);
+    notify('Sukses', 'Pesanan berhasil dikirim', 'success', 'fas fa-shipping-fast', 'order');
+
   }
 }
 

@@ -93,7 +93,7 @@
 <div class="tab-pane fade show" id="tab4" role="tabpanel" >
 
 <div class="col-12">
-  <?php foreach ($order as $item): if($item->status!=4){continue;}  ?>
+  <?php foreach ($order as $item): if($item->status!=5){continue;}  ?>
     <div class="col-lg-3">
       <div class="card">
         <div class="p-2">
@@ -184,11 +184,39 @@
         </div>
         <div class="form-group col-md-12">
           <label>Nomor Resi / AWB </label>
-          <input class="form-control" value="<?php echo $item->awb; ?>" required>
+          <input class="form-control"  name="awb" value="<?php echo $item->awb; ?>" required>
         </div>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success" name="confirmSent" value="confirmSent">Konfirmasi Pengiriman Barang</button>
+          <button type="button" class="btn btn-grey" data-dismiss="modal">Kembali</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
+
+<?php foreach ($order as $item): if($item->status!=4){continue;}  ?>
+<div class="modal fade" id="delivery<?php echo  $item->id; ?>" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+          <h4>Order # <?php echo $item->id; ?></h4>
+        </center>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form role="form" method="post">
+        <div class="modal-body">
+          <?php //var_dump($item); ?>
+          <input type="text" name="id" value="<?php echo $item->id ?>" hidden>
+          <input type="text" name="product" value="<?php echo $item->product ?>" hidden>
+          Nomor resi Pesanan ini adalah <?php echo $item->awb; ?>
+
+        </div>
+        <div class="modal-footer">
           <button type="button" class="btn btn-grey" data-dismiss="modal">Kembali</button>
         </div>
       </form>
