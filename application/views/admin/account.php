@@ -12,7 +12,6 @@
     </div>
   </div>
 </div>
-
 <div class="page-navs bg-white">
   <div class="nav-scroller">
     <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
@@ -42,7 +41,6 @@
             </div>
           </div>
         <?php endforeach; ?>
-
       </div>
     </div>
     <div class="tab-pane fade show" id="tab2" role="tabpanel" >
@@ -64,7 +62,6 @@
             </div>
           </div>
         <?php endforeach; ?>
-
       </div>
     </div>
   </div>
