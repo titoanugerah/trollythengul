@@ -24,7 +24,7 @@
   <div class="tab-content mt-2 mb-3" >
     <div class="tab-pane fade show active" id="tab1" role="tabpanel" >
       <div class="card-body row">
-        <?php foreach ($account as $customer): if($customer->role!='customer'){continue;} ?>
+        <?php foreach ($account as $customer): if($customer->role!='client'){continue;} ?>
           <div class="col-sm-6 col-lg-3">
             <div class="card">
               <div class="p-2">
