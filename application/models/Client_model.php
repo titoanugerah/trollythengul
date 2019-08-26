@@ -74,6 +74,38 @@ class Client_model extends CI_Model
     return $upload;
   }
 
+  public function sentEmail($to, $fullname, $subject, $content)
+  {
+    $account = $this->getDataRow('webconf', 'id', 1);
+    $config = [
+    'protocol' => 'sentmail',
+    'smtp_host' => $account->host,
+    'smtp_user' => $account->email,
+    'smtp_pass' => $account->password,
+    'smtp_crypto' => $account->crypto,
+    'charset' => 'utf-8',
+    'crlf' => 'rn',
+    'newline' => "\r\n",
+    'smtp_port' => $account->port
+    ];
+    $this->load->library('email', $config);
+    $this->email->from($account->email);
+    $this->email->to($to);
+    $this->email->subject($subject);
+    $this->email->message('
+    Yth. '.$fullname.'
+    Di tempat.
+
+    '.$content.'
+
+    Atas perhatiannya kami ucapkan terima kasih.
+
+    Admin
+    ');
+    $sent = $this->email->send();
+    error_reporting(0);
+  }
+
   public function callRajaOngkirAPI($param)
   {
     $curl = curl_init();

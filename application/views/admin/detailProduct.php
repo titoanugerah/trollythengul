@@ -173,7 +173,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="progress progress">
-                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="<?php echo (int)$product->rating ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="<?php echo $product->rating ?>" aria-valuemin="0" aria-valuemax="5"></div>
               </div>
 
             </div>

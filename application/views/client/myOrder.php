@@ -165,9 +165,6 @@
 
               </div>
               <div class="col-7">
-                <?php
-                if($item->status==1){$status = 'Menunggu verifikasi dari admin';} ?>
-                <strong style="color:green;"><?php echo $status; ?></strong>
               </div>
             </div>
           </div>
