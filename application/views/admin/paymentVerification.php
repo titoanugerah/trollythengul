@@ -6,8 +6,6 @@
         <h5 class="text-white op-7 mb-2"> Halaman panel pengelolaan verifikasi pembayaran</h5>
       </div>
       <div class="ml-md-auto py-2 py-md-0">
-        <button type="button" class="btn btn-success btn-round" data-toggle="modal" data-target="#addPromo">Tambah Promo</button> &nbsp;
-        <button type="button" class="btn btn-success btn-round" data-toggle="modal" data-target="#recoverPromo" hidden>Kembalikan Promo Terhapus</button>
       </div>
     </div>
   </div>

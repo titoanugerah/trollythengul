@@ -197,6 +197,8 @@
           <div class="form-group col-6 col-md-5">
             <label>Nama Penerima</label>
             <input type="text" class="form-control" value="<?php echo $webconf->bank_user; ?>" required>
+            <input type="text" class="form-control" name="amount" value="<?php echo $order->subtotal; ?>" hidden>
+
           </div>
         </div>
         kemudian upload bukti pembayaran pada kolom dibawah ini

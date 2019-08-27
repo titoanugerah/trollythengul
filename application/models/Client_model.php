@@ -311,6 +311,7 @@ class Client_model extends CI_Model
         $this->createLog(1, 'a', $this->session->userdata['id'], $data);
         $this->updateData('detail_order', 'id', $item->id, 'status', 1);
       }
+      $this->sentEmail($this->getDataRow('account', 'id', 1)->email, 'Admin', 'Pembayaran membutuhkan verifikasi', 'Terdapat pembayaran sejumlah Rp.'.$this->input->post('amount').' silahkan dilakukan verifikasi');
       notify('Berhasil', 'Pengiriman bukti gambar berhasil dilakukan, selanjutnya silahkan anda bisa pantau pada halaman Pesanan Saya' ,'success','fas fa-check','myOrder');
     }
   }
