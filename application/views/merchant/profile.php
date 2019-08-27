@@ -71,7 +71,7 @@
 
             <div class="form-group col-6 col-md-3">
               <label>Tanggal Mendaftar</label>
-              <input type="text" class="form-control" value="<?php echo date($this->session->userdata['join_date'], 'Y-m-d H:i:s' ); ?>">
+              <input type="text" class="form-control" value="<?php echo $this->session->userdata['join_date']; ?>">
             </div>
             <div class="form-group col-6 col-md-3">
               <label>Nomor KTP</label>
@@ -94,7 +94,7 @@
                   <option value="<?php echo $item->city_id ?>" <?php if($item->city_id==$this->session->userdata['city_id']){echo 'selected';} ?>><?php echo $item->type.'  '.$item->city_name.', '.$item->province; ?></option>
                 <?php endforeach; ?>
               </select>
-            </div>            
+            </div>
           </div>
         </div>
         <div class="card-footer">
