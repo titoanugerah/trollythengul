@@ -85,7 +85,7 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $item->product ?></td>
                     <td><?php echo (($item->price*$item->qty)+$item->shipment_fee) ?></td>
-                    <td> <a href="<?php echo base_url('detailAccount/'.$item->id); ?>" class="btn btn-info"> Detail </a> </td>
+                    <td> <a href="<?php echo base_url('detailProduct/'.$item->id); ?>" class="btn btn-info"> Detail </a> </td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>
@@ -124,7 +124,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
