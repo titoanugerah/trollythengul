@@ -14,7 +14,7 @@
   <div class="nav-scroller">
     <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
       <a class="nav-link active show" data-toggle="tab" href="#tab1">Profil Pelanggan</a>
-      <a class="nav-link mr-5" data-toggle="tab" href="#tab2">Riwayat Pembelian</a>
+      <a class="nav-link mr-5" data-toggle="tab" href="#tab2">Riwayat Pemesanan</a>
       <a class="nav-link mr-5" data-toggle="tab" href="#tab3">Statistik Pengiriman</a>
 
     </div>
@@ -67,7 +67,7 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Produk</th>
-                  <th>Total</th>
+                  <th>Toko</th>
                   <th>Opsi</th>
                 </tr>
               </thead>
@@ -75,7 +75,7 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Produk</th>
-                  <th>Total</th>
+                  <th>Toko</th>
                   <th>Opsi</th>
                 </tr>
               </tfoot>
@@ -84,7 +84,7 @@
                   <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $item->product ?></td>
-                    <td><?php echo (($item->price*$item->qty)+$item->shipment_fee) ?></td>
+                    <td><?php echo $item->merchant; ?></td>
                     <td> <a href="<?php echo base_url('detailProduct/'.$item->id); ?>" class="btn btn-info"> Detail </a> </td>
                   </tr>
                 <?php endforeach; ?>
