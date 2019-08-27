@@ -57,14 +57,14 @@
 
         <div class="card-body">
           <div class="row">
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
               <label>Nama Merchant</label>
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Masukan nama merchant" aria-label="name" aria-describedby="basic-addon1" name="name" value="<?php echo $this->session->userdata['merchant']; ?>">
               </div>
             </div>
 
-            <div class="form-group col-6 col-md-2">
+            <div class="form-group col-6 col-md-3">
               <label>Nomor Telepon</label>
               <input type="text" class="form-control" placeholder="Masukan nomor telepon" name="phone_number" value="<?php echo $this->session->userdata['phone_number']; ?>">
             </div>
@@ -76,10 +76,6 @@
             <div class="form-group col-6 col-md-3">
               <label>Nomor KTP</label>
               <input type="text" name="idc_number" class="form-control" value="<?php echo $this->session->userdata['idc_number']; ?>">
-            </div>
-            <div class="form-group col-6 col-md-2">
-              <br>
-              <button type="button" name="button" class="btn btn-info">Lihat Lampiran</button>
             </div>
           </div>
           <div class="row">
@@ -99,7 +95,7 @@
         </div>
         <div class="card-footer">
           <button type="submit" name="updateAccount" value="updateAccount" class="btn btn-info">Simpan Data</button>
-
+          <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-info">Upload Foto Profil</button>
         </div>
       </div>
       <div class="tab-pane fade show " id="tab2" role="tabpanel" >
