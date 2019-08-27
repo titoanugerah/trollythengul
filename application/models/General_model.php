@@ -329,7 +329,7 @@ class General_model extends CI_Model
 
   public function cDetailProduct($id)
   {
-    $data['shipment'] = $this->db->query('select shipment_province, count(id) from view_detail_order where id_merchant= '.$this->session->userdata['id'].' group by shipment_province')->result();
+    $data['shipment'] = $this->db->query('select shipment_province, count(id) as shipment_count from view_detail_order where id_product= '.$id.' group by shipment_province')->result();
     $data['attachment'] = $this->getSomeData('attachment', 'id_product', $id);
     $data['attachment1'] = $this->getSomeData('attachment', 'id_product', $id);
     $data['category'] = $this->getAllData('view_category');
