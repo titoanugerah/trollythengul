@@ -224,7 +224,7 @@ class admin_model extends CI_Model
   public function cDetailAccount($role,$id)
   {
     $data['detail'] = $this->getDataRow('view_'.$role, 'id', $id);
-    if ($role=='customer') {$data['order'] = $this->getSomeData('view_detail_order', 'id_customer', $id);$data['shipment'] = $this->db->query('select *, count(id) as shipment_count from view_detail_order where id_customer ='.$id.' group by shipment_street')->result();}
+    if ($role=='client') {$data['order'] = $this->getSomeData('view_detail_order', 'id_customer', $id);$data['shipment'] = $this->db->query('select *, count(id) as shipment_count from view_detail_order where id_customer ='.$id.' group by shipment_street')->result();}
     elseif ($role=='merchant') {$data['order'] = $this->getSomeData('view_detail_order', 'id_merchant', $id);$data['shipment'] = $this->db->query('select shipment_province, count(id) as shipment_count from view_detail_order where id_merchant='.$id.' group by shipment_province')->result();}
     $data['view_name'] = 'detailAccount'.ucfirst($role);
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
