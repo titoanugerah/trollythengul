@@ -68,14 +68,14 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-3">
                 <label>Nama Merchant</label>
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Masukan nama merchant" aria-label="name" aria-describedby="basic-addon1" name="name" value="<?php echo $detail->merchant; ?>">
                 </div>
               </div>
 
-              <div class="form-group col-6 col-md-2">
+              <div class="form-group col-6 col-md-3">
                 <label>Nomor Telepon</label>
                 <input type="text" class="form-control" placeholder="Masukan nomor telepon" name="phone_number" value="<?php echo $detail->phone_number; ?>">
               </div>
@@ -88,9 +88,7 @@
                 <label>Nomor KTP</label>
                 <input type="text" class="form-control" value="<?php echo $detail->idc_number; ?>">
               </div>
-              <div class="form-group col-6 col-md-2">
-              <button type="button" name="button" class="btn btn-info">Lihat Lampiran</button>
-            </div>
+
 
             </div>
             <div class="row">
