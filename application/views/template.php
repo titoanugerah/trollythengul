@@ -61,7 +61,7 @@
 								<i class="fa fa-search"></i>
 							</a>
 						</li>
-						<li class="nav-item dropdown hidden-caret" <?php if(!$this->session->userdata['login']){echo 'hidden';} ?>>
+						<li class="nav-item dropdown hidden-caret" <?php if(!$this->session->userdata['login']){echo 'hidden';} ?> hidden>
 							<a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fa fa-envelope"></i>
 							</a>
@@ -95,7 +95,7 @@
 								</li>
 							</ul>
 						</li>
-						<li class="nav-item dropdown hidden-caret" <?php if(!$this->session->userdata['login']){echo 'hidden';} ?>>
+						<li class="nav-item dropdown hidden-caret" <?php if(!$this->session->userdata['login']){echo 'hidden';} ?> hidden>
 							<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 								<i class="fa fa-bell"></i>
 								<span class="notification">4</span>
