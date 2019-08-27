@@ -16,7 +16,6 @@
       <a class="nav-link mr-5" data-toggle="tab" href="#tab0">Profil Merchant</a>
       <a class="nav-link mr-5" data-toggle="tab" href="#tab2">Riwayat Pembelian</a>
       <a class="nav-link mr-5" data-toggle="tab" href="#tab3">Riwayat Pengiriman</a>
-      <a class="nav-link mr-5" data-toggle="tab" href="#tab4">Riwayat Pencarian</a>
 
     </div>
   </div>
@@ -162,9 +161,6 @@
             </table>
           </div>
         </div>
-      </div>
-      <div class="tab-pane fade show " id="tab4" role="tabpanel" >
-        ini coba24242
       </div>
 
   </div>
