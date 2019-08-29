@@ -112,8 +112,8 @@ class admin_model extends CI_Model
   //APPLICATION
   public function cCategory()
   {
-    if ($this->input->post('keyword')) {$keyword = $this->input->post('keyword');$data['category'] = $this->db->query('select * from category where name LIKE "%'.$keyword.'%" or description LIKE "%'.$keyword.'%"')->result();}
-    else{$data['category'] = $this->getAllData('category');}
+    if ($this->input->post('keyword')) {$keyword = $this->input->post('keyword');$data['category'] = $this->db->query('select * from view_category where name LIKE "%'.$keyword.'%" or description LIKE "%'.$keyword.'%"')->result();}
+    else{$data['category'] = $this->getAllData('view_category');}
     $data['product'] = $this->getAllData('view_product');
     $data['detailCategory'] = $this->getAllData('view_category');
     $data['view_name'] = 'category';

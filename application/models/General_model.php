@@ -209,10 +209,16 @@ class General_model extends CI_Model
 
   public function loginValidation()
   {
-    if ($this->getNumRow2('account', 'username', $this->input->post('username'), 'password', md5($this->input->post('password')))==1) {
+    $IsExist = $this->getNumRow2('account', 'username', $this->input->post('username'), 'password', md5($this->input->post('password')));
+    $IsActive = $this->getDataRow('account', 'username', $this->input->post('username'))->status;
+    if ($IsExist==1 & $IsActive ==1) {
       $login['session'] = $this->getSession($this->getDataRow('account','username', $this->input->post('username'))->id);
       $login['status'] = true;
       notify('Berhasil Masuk', 'Selamat datang kembali '.$login['session']['fullname'],'success','fas fa-smile-wink',null);
+    }elseif ($IsExist==1) {
+      $login['status'] = false;
+      notify('Gagal Masuk', 'Mohon maaf akun anda di banned, silahkan hubungi admin','danger','fas fa-bullhorn',null);
+
     } else {
       $login['status'] = false;
       notify('Gagal Masuk', 'Mohon maaf kombinasi username dan password anda salah, silahkan periksa kembali','danger','fas fa-bullhorn',null);

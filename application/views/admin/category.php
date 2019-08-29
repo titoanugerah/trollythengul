@@ -18,13 +18,12 @@
       <div class="col-sm-6 col-lg-3">
         <div class="card">
           <div class="p-2">
-            <?php $i=0;$img=array();foreach($product as $product): if($product->id_category == $category->id){$img[$i] = $product->image;$i++;} endforeach; ?>
-            <img class="card-img-top rounded" src="<?php if($i==0){echo base_url('./assets/upload/no.jpg');} else {echo base_url('./assets/upload/'.$img[rand(0,($i-1))]);} ?>" alt="Product 1">
+            <img class="card-img-top rounded" src="<?php echo base_url('./assets/upload/'.$category->image); ?>" alt="Product 1">
           </div>
           <div class="card-body pt-2">
             <h4 class="mb-1 fw-bold"><?php echo $category->name; ?></h4>
             <p class="text-muted small mb-2"><?php echo $category->description; ?></p>
-            <p style="color:green;"><b>Jumlah Produk <?php echo $i; ?></b> </p>
+            <p style="color:green;"><b>Jumlah Produk <?php echo $category->product_count; ?></b> </p>
             <div class="row">
             <button type="button" class="btn btn-success btn-round" data-toggle="modal" data-target="#detailCategory<?php echo $category->id; ?>">Detail</button> &nbsp;&nbsp;&nbsp;
             <button type="button" class="btn btn-danger btn-round" data-toggle="modal" data-target="#deleteCategory<?php echo $category->id; ?>">Hapus</button>
