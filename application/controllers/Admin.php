@@ -54,6 +54,17 @@ class Admin extends CI_Controller
     $this->load->view('template', $this->admin_model->cPaymentVerification());
   }
 
+  public function redeemMerchant()
+  {
+    $this->load->view('template', $this->admin_model->cRedeemMerchant());
+  }
+
+  public function redeem($id)
+  {
+    $this->admin_model->redeem($id);
+  }
+
+
 }
 
 

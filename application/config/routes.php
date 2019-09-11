@@ -19,6 +19,8 @@ $route['account/(:any)'] = 'admin/account/$1';
 $route['detailAccount/(:any)/(:any)'] = 'admin/detailAccount/$1/$2';
 $route['paymentVerification'] = 'admin/paymentVerification';
 $route['redeemMerchant'] = 'admin/redeemMerchant';
+$route['redeem/(:any)'] = 'admin/redeem/$1';
+
 //MERCHANT AREA
 $route['product'] = 'merchant/product';
 $route['detailMyProduct/(:any)'] = 'merchant/detailMyProduct/$1';

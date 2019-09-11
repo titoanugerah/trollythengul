@@ -290,13 +290,6 @@ class Merchant_model extends CI_Model
     notify('Sukses', 'Pesanan berhasil dikirim', 'success', 'fas fa-shipping-fast', 'order');
   }
 
-  public function cRedeemMerchant()
-  {
-//    $data['redeem'] = $this->
-    $data['view_name'] = 'redeemMerchant';
-    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
-    return $data;
-  }
 }
 
 ?>

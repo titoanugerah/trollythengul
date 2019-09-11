@@ -25,6 +25,12 @@ class admin_model extends CI_Model
     return $this->db->get_where($table, $where = array($whereVar => $whereVal))->result();
   }
 
+  public function getSomeData2($table, $whereVar1, $whereVal1, $whereVar2, $whereVal2)
+  {
+    return $this->db->get_where($table, $where = array($whereVar1 => $whereVal1, $whereVar2 => $whereVal2))->result();
+  }
+
+
   public function getDataRow($table, $whereVar, $whereVal)
   {
     return $this->db->get_where($table, $where = array($whereVar => $whereVal))->row();
@@ -254,6 +260,7 @@ class admin_model extends CI_Model
 
   public function cPaymentVerification()
   {
+
     $data['order'] = $this->db->query('select * from view_order where status=1 order by id desc')->result();
     $data['view_name'] = 'paymentVerification';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
@@ -276,6 +283,23 @@ class admin_model extends CI_Model
     }
 
   }
+
+  public function cRedeemMerchant()
+  {
+    $data['redeem'] = $this->getAllData('view_redeem_merchant');
+    $data['view_name'] = 'redeemMerchant';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+  }
+
+  public function redeem($id)
+  {
+    foreach ($this->getSomeData2('detail_order', 'id_merchant', $id, 'status', 5) as $item) {
+      $this->updateData('detail_order', 'id', $item->id, 'status', 6);
+    }
+    notify('Sukses', 'Proses redeem berhasil dilakukan', 'success', 'fas fa-user-check','redeemMerchant');
+  }
+
 
 }
 
