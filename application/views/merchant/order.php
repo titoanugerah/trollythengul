@@ -81,7 +81,6 @@
           <h4 class="mb-1 fw-bold"><?php echo $item->product; ?></h4>
           <p class="text-muted small mb-2"><?php echo $item->fullname; ?></p>
           <p style="color:green;"><?php echo $item->qty.' buah'; ?> </p>
-          <a data-toggle="modal" style="color:white;" data-target="#delivery<?php echo $item->id; ?>" class="btn btn-info">Konfirmasi</a>
         </div>
       </div>
     </div>

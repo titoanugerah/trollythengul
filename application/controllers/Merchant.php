@@ -20,6 +20,7 @@ class Merchant extends CI_Controller
   {
     if($this->input->post('addImage')){$this->merchant_model->addImage($id);}
     elseif($this->input->post('deleteAttachment')){$this->merchant_model->deleteAttachment($id);}
+    elseif($this->input->post('deleteProduct')){$this->merchant_model->deleteProduct($id);}
     elseif($this->input->post('updateProduct')){$this->merchant_model->updateProduct($id);}
     $this->load->view('template', $this->merchant_model->cDetailMyProduct($id));
   }

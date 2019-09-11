@@ -8,6 +8,8 @@
       <div class="ml-md-auto py-2 py-md-0">
         <a href="<?php echo base_url('product'); ?>" class="btn btn-success btn-round">Kembali ke Produk</a>
         <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-round">Tambahkan Foto</button>
+        <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-danger btn-round">Hapus Produk</button>
+
       </div>
     </div>
   </div>
@@ -198,7 +200,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-danger" name="deleteAttachment" value="deleteAttachment">Hapus Kategori</button>
+            <button type="submit" class="btn btn-danger" name="deleteAttachment" value="deleteAttachment">Hapus Gambar</button>
             <button type="button" class="btn btn-grey" data-dismiss="modal">Kembali</button>
           </div>
         </form>
@@ -206,3 +208,29 @@
     </div>
   </div>
 <?php endforeach; ?>
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+          <h4>Hapus Produk</h4>
+        </center>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form role="form" method="post">
+        <div class="modal-body">
+          <p>Apakah anda yakin menghapus produk ini? untuk melanjutkan silahkan masukan password anda pada kolom dibawah ini</p>
+          <div class="form-group col-6 col-md-12">
+            <input type="password" name="password" class="form-control" placeholder="masukan password anda">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger" name="deleteProduct" value="deleteProduct">Hapus Produk</button>
+          <button type="button" class="btn btn-grey" data-dismiss="modal">Kembali</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

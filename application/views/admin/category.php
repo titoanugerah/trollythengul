@@ -21,7 +21,7 @@
             <img class="card-img-top rounded" src="<?php echo base_url('./assets/upload/'.$category->image); ?>" alt="Product 1">
           </div>
           <div class="card-body pt-2">
-            <h4 class="mb-1 fw-bold"><?php echo $category->name; ?></h4>
+            <h4 class="mb-1 fw-bold"><?php echo $category->category; ?></h4>
             <p class="text-muted small mb-2"><?php echo $category->description; ?></p>
             <p style="color:green;"><b>Jumlah Produk <?php echo $category->product_count; ?></b> </p>
             <div class="row">

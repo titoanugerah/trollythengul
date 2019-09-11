@@ -14,7 +14,7 @@
 </div>
 <div class="page-inner mt--5">
   <div class="row">
-    <?php foreach ($product as $product):  ?>
+    <?php foreach ($product as $product): if($product->status==0){continue;} ?>
       <div class="col-lg-3">
         <div class="card">
           <div class="p-2">

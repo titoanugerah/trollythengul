@@ -43,7 +43,7 @@ class Merchant_model extends CI_Model
 
   public function updateData($table, $whereVar, $whereVal, $setVar, $setVal)
   {
-    $this->db->where($where = array($whereVar => $whereVal));
+    $this->db->where($where = array($whereVar => $whereVal ));
     return $this->db->update($table, $data = array($setVar=> $setVal));
   }
 
@@ -53,6 +53,7 @@ class Merchant_model extends CI_Model
     $config['overwrite'] = TRUE;
     $config['file_name']     =  str_replace(' ','_',$filename);
     $config['allowed_types'] = $allowedFile;
+    $this->db->where($where = array($whereVar => $whereVal));
     $this->load->library('upload', $config);
     if (!$this->upload->do_upload('fileUpload')) {
       $upload['status']=0;
@@ -147,11 +148,11 @@ class Merchant_model extends CI_Model
     notify('Sukses', 'Proses pengembalian produk yang terhapus berhasil dilakukan', 'success', 'fas fa-check', null);
   }
 
-  public function deleteProduct()
-  {
-    if (md5($this->input->post('password'))==$this->session->userdata['password']) {$this->updateData('product', 'id', $this->input->post('id'), 'status', 0);notify('Sukses', 'Proses pengembalian produk yang terhapus berhasil dilakukan', 'success', 'fas fa-check', null);}
-    else {notify('Gagal', 'Proses penghapusan produk gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', null);}
-  }
+  // public function deleteProduct()
+  // {
+  //   if (md5($this->input->post('password'))==$this->session->userdata['password']) {$this->updateData('product', 'id', $this->input->post('id'), 'status', 0);notify('Sukses', 'Proses pengembalian produk yang terhapus berhasil dilakukan', 'success', 'fas fa-check', null);}
+  //   else {notify('Gagal', 'Proses penghapusan produk gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', null);}
+  // }
 
   public function cDetailMyProduct($id)
   {
@@ -216,9 +217,21 @@ class Merchant_model extends CI_Model
       }
       notify('Sukses', 'Proses penghapusan gambar berhasil dilakukan', 'success', 'fas fa-plus', 'detailMyProduct/'.$id);
     } else {
+      notify('Gagal', 'Proses penghapusan gambar gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', 'detailMyProduct/'.$id);
+    }
+  }
+
+  public function deleteProduct($id)
+  {
+    if (md5($this->input->post('password'))==$this->session->userdata['password']) {
+      // var_dump(md5($this->input->post('password'))==$this->session->userdata['password']);die;
+      $this->updateData('product', 'id', $id, 'status', 0);
+      notify('Sukses', 'Proses penghapusan produk berhasil dilakukan', 'success', 'fas fa-plus', 'product');
+    } else {
       notify('Gagal', 'Proses penghapusan produk gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', 'detailMyProduct/'.$id);
     }
   }
+
 
   public function setDefaultImage($id_product,$id_attachment)
   {
