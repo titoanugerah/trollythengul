@@ -43,5 +43,10 @@ class Merchant extends CI_Controller
     if($this->input->post('confirmSent')){$this->merchant_model->confirmSent();}
     $this->load->view('template', $this->merchant_model->cOrder());
   }
+
+  public function redeemMerchant()
+  {
+    $this->load->view('template', $this->merchant_model->cRedeemMerchant());
+  }
 }
 ?>

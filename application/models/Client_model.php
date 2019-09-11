@@ -222,9 +222,8 @@ class Client_model extends CI_Model
       $id_order = $this->getDataRow2('order', 'id_customer', $this->session->userdata['id'], 'status', 0)->id;
     }
     $merchant = $this->getDataRow('product', 'id', $id);
-    $datas = array('id_order' => $id_order, 'id_product' => $id, 'id_merchant' => $merchant->id_merchant, 'qty' => $this->input->post('qty'), 'price' => $merchant->price, 'special_request' => $this->input->post('special_request'));
+    $datas = array('id_order' => $id_order, 'id_product' => $id, 'id_merchant' => $merchant->id_merchant, 'qty' => $this->input->post('qty'), 'price' => $merchant->price, 'special_request' => $this->input->post('special_request'), 'status' => 0);
     $this->db->insert('detail_order', $datas);
-
     notify('Berhasil ditambahkan', 'Barang berhasil ditambahkan ke keranjang','success','fas fa-plus','myCart');
   }
 

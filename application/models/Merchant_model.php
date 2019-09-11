@@ -288,7 +288,14 @@ class Merchant_model extends CI_Model
     $data['courier'] = explode($order->courier,'/')[0];
     $this->createLog(4,'a', $this->session->userdata['merchant'], $data);
     notify('Sukses', 'Pesanan berhasil dikirim', 'success', 'fas fa-shipping-fast', 'order');
+  }
 
+  public function cRedeemMerchant()
+  {
+//    $data['redeem'] = $this->
+    $data['view_name'] = 'redeemMerchant';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
   }
 }
 

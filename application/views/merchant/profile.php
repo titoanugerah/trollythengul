@@ -16,15 +16,15 @@
       <a class="nav-link mr-5" data-toggle="tab" href="#tab0">Profil Merchant</a>
       <a class="nav-link mr-5" data-toggle="tab" href="#tab2">Riwayat Pembelian</a>
       <a class="nav-link mr-5" data-toggle="tab" href="#tab3">Riwayat Pengiriman</a>
+      <a class="nav-link mr-5" data-toggle="tab" href="#tab4">Rekening Bank</a>
 
     </div>
   </div>
 </div>
 <form  method="post">
-<div class="card">
-  <div class="tab-content mt-2 mb-3" >
+  <div class="card">
+    <div class="tab-content mt-2 mb-3" >
       <div class="tab-pane fade show active" id="tab1" role="tabpanel" >
-
         <div class="card-body">
           <div class="row">
             <div class="form-group">
@@ -36,15 +36,36 @@
                 <input type="text" class="form-control" placeholder="Masukan username" aria-label="Username" aria-describedby="basic-addon1" name="username" value="<?php echo $this->session->userdata['username']; ?>">
               </div>
             </div>
-
             <div class="form-group col-6 col-md-5">
               <label>Nama Lengkap</label>
               <input type="text" class="form-control" placeholder="Masukan nama lengkap" name="fullname" value="<?php echo $this->session->userdata['fullname']; ?>">
             </div>
-
             <div class="form-group col-6 col-md-4">
               <label>Email</label>
               <input type="email" class="form-control" placeholder="Masukan email anda" name="email" value="<?php echo $this->session->userdata['email']; ?>">
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" name="updateAccount" value="updateAccount" class="btn btn-info">Simpan Data</button>
+        </div>
+      </div>
+      <div class="tab-pane fade show" id="tab4" role="tabpanel" >
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group">
+              <label>Nama Bank</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Masukan nama bank" aria-label="Username" aria-describedby="basic-addon1" name="bank_name" value="<?php echo $this->session->userdata['bank_name']; ?>">
+              </div>
+            </div>
+            <div class="form-group col-6 col-md-5">
+              <label>Nama Lengkap Pemilik Rekening Bank</label>
+              <input type="text" class="form-control" placeholder="Masukan nama lengkap pemilik bank" name="bank_user" value="<?php echo $this->session->userdata['bank_user']; ?>">
+            </div>
+            <div class="form-group col-6 col-md-4">
+              <label>Nomor Rekening</label>
+              <input type="text" class="form-control" placeholder="Masukan nomor rekening" name="bank_account" value="<?php echo $this->session->userdata['bank_account']; ?>">
             </div>
           </div>
         </div>
@@ -163,8 +184,8 @@
         </div>
       </div>
 
+    </div>
   </div>
-</div>
 </form>
 
 <div class="modal fade" id="myModal" role="dialog">

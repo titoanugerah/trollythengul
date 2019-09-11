@@ -135,7 +135,10 @@ class General_model extends CI_Model
       'address_province' => $account->address_province,
       'address_postal' => $account->address_postal,
       'city_id' => $account->city_id,
-      'province_id' => $account->province_id
+      'province_id' => $account->province_id,
+      'bank_name' => $account->bank_name,
+      'bank_user' => $account->bank_user,
+      'bank_account' => $account->bank_account,
       );
     } elseif ($account->role=='client') {
       $session = array(
@@ -242,23 +245,28 @@ class General_model extends CI_Model
     $this->db->where($where = array('id' => $this->session->userdata['id']));
     $this->db->update('account', $data);
     if ($this->session->userdata['role']=='admin') {$this->updateData('admin', 'id', $this->session->userdata['id'],'phone_number',$this->input->post('phone_number'));}
-    notify('Update Berhasil', 'Proses pembaharuan akun '.$this->session->userdata['fullname'].' berhasil','success','fas fa-smile-wink',null);
+    if ($this->session->userdata['role']=='client') {$this->updateData('client', 'id', $this->session->userdata['id'],'phone_number',$this->input->post('phone_number'));}
     if ($this->session->userdata['role']=='merchant') {
       $cityDetail = $this->getCityDetail($this->input->post('city_id'));
       $data = array(
-      'phone_number' => $this->input->post('phone_number'),
-      'idc_number' => $this->input->post('idc_number'),
-      'name' => $this->input->post('name'),
-      'address_street' => $this->input->post('address_street'),
-      'address_city' => $cityDetail->type.' '.$cityDetail->city_name,
-      'address_province' => $cityDetail->province,
-      'address_postal' => $cityDetail->postal_code,
-      'city_id' => $this->input->post('city_id'),
-      'province_id' => $cityDetail->province_id
+        'phone_number' => $this->input->post('phone_number'),
+        'idc_number' => $this->input->post('idc_number'),
+        'name' => $this->input->post('name'),
+        'address_street' => $this->input->post('address_street'),
+        'address_city' => $cityDetail->type.' '.$cityDetail->city_name,
+        'address_province' => $cityDetail->province,
+        'address_postal' => $cityDetail->postal_code,
+        'city_id' => $this->input->post('city_id'),
+        'province_id' => $cityDetail->province_id,
+        'bank_name' => $this->input->post('bank_name'),
+        'bank_user' => $this->input->post('bank_user'),
+        'bank_account' => $this->input->post('bank_account')
+
       );
       $this->db->where($where = array('id' => $this->session->userdata['id'] ));
       $this->db->update('merchant', $data);
     }
+    notify('Update Berhasil', 'Proses pembaharuan akun '.$this->session->userdata['fullname'].' berhasil','success','fas fa-smile-wink',null);
     return $this->getSession($this->session->userdata['id']);
   }
 

@@ -16,6 +16,8 @@
     <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
       <a class="nav-link active show" data-toggle="tab" href="#tab1">Informasi Umum</a>
       <a class="nav-link mr-5" data-toggle="tab" href="#tab2">Email</a>
+      <a class="nav-link mr-5" data-toggle="tab" href="#tab2">Email</a>
+
     </div>
   </div>
 </div>

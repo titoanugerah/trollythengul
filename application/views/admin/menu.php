@@ -48,6 +48,14 @@
   </a>
 </li>
 
+<li class="nav-item <?php if($view_name=='redeemMerchant'){echo 'active';}  ?>">
+  <a href="<?php echo base_url('redeemMerchant'); ?>">
+    <i class="fas fa-check"></i>
+    <p>Redeem Merchant</p>
+  </a>
+</li>
+
+
 <li class="nav-item" hidden>
   <a href="<?php echo base_url('promo'); ?>">
     <i class="far fa-credit-card"></i>
