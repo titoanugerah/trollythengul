@@ -32,3 +32,4 @@ $route['myCart'] = 'client/myCart';
 $route['payment/(:any)'] = 'client/payment/$1';
 $route['myOrder'] = 'client/myOrder';
 $route['StatusOrder/(:any)'] = 'client/StatusOrder/$1';
+$route['promoList'] = 'client/promoList';

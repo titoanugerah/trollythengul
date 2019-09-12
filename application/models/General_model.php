@@ -335,8 +335,13 @@ class General_model extends CI_Model
 
   public function cDashboard()
   {
-    //    if ($this->session->userdata['role']=='merchant') {}
-    $data['view_name'] = 'no';
+    if ($this->session->userdata['role']=='merchant') {
+      $data['sales'] = $this->db->query('select count(*) as sales, sum(shipment_fee+price) as profit, ifnull((sum(rating)/count(*)),0) as rating, count(distinct(id_customer)) as buyer from view_detail_order where id_merchant='.$this->session->userdata['id'].' and status>4')->row();
+    } else if ($this->session->userdata['role']=='admin') {
+      $data['sales'] = $this->db->query('select count(*) as sales, sum(shipment_fee+price) as profit, ifnull((sum(rating)/count(*)),0) as rating, count(distinct(id_customer)) as buyer from view_detail_order where status>4')->row();
+    }
+
+    $data['view_name'] = 'dashboard';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
     return $data;
   }

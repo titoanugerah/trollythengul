@@ -17,3 +17,10 @@
     <p>Pesanan Saya</p>
   </a>
 </li>
+
+<li class="nav-item <?php if($view_name=='promoList'){echo 'active';} ?>">
+  <a href="<?php echo base_url('promoList'); ?>">
+    <i class="far fa-credit-card"></i>
+    <p>Promo</p>
+  </a>
+</li>

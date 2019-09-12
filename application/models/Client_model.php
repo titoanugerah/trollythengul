@@ -301,6 +301,16 @@ class Client_model extends CI_Model
     notify('Berhasil dihapus', 'Kode promo berhasil dihapus' ,'success','fas fa-check',null);
   }
 
+  public function cPromoList()
+  {
+    if ($this->input->post('keyword')) {$keyword = $this->input->post('keyword');$data['promo'] = $this->db->query('select * from view_promo where promo LIKE "%'.$keyword.'%" or promo_code LIKE "%'.$keyword.'%" or description LIKE "%'.$keyword.'%"')->result();}
+    else{$data['promo'] = $this->getAllData('view_promo');}
+    $data['view_name'] = 'promoList';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+
+  }
+
   public function uploadPayment($id)
   {
     if($this->updateData('order', 'id', $id, 'payment_image', 'payment_'.$id.$this->uploadFile('payment_'.$id, 'jpg|jpeg|bmp|png')['ext'])){

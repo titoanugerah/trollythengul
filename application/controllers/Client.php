@@ -34,7 +34,11 @@ class Client extends CI_Controller
   {
     if($this->input->post('confirmArrived')){$this->client_model->confirmArrived();}
     $this->load->view('template', $this->client_model->cMyOrder());
+  }
 
+  public function promoList()
+  {
+    $this->load->view('template', $this->client_model->cPromoList());
   }
 }
 
