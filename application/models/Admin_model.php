@@ -7,6 +7,7 @@ class admin_model extends CI_Model
   function __construct()
   {
     error_reporting($this->db->get_where('webconf', $where = array('id' => 1))->row('developer_mode'));
+    $this->load->library('Excel');
   }
 
   //CORE
@@ -300,7 +301,7 @@ class admin_model extends CI_Model
     notify('Sukses', 'Proses redeem berhasil dilakukan', 'success', 'fas fa-user-check','redeemMerchant');
   }
 
-  public function downloadRecap()
+  public function downloadReport()
     {
       $objPHPExcel = new PHPExcel();
       //INFO AND DETAILS
@@ -335,7 +336,7 @@ class admin_model extends CI_Model
         ->setCellValue('E'.$row, $data->fullname)
         ->setCellValue('F'.$row, $data->price)
         ->setCellValue('G'.$row, $data->qty)
-        ->setCellValue('G'.$row, $data->subtotal);
+        ->setCellValue('H'.$row, $data->subtotal);
         $row++;$i++;
       endforeach;
       //FORMATING
