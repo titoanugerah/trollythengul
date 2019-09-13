@@ -55,6 +55,12 @@
   </a>
 </li>
 
+<li class="nav-item <?php if($view_name=='downloadReport'){echo 'active';}  ?>">
+  <a href="<?php echo base_url('downloadReport'); ?>">
+    <i class="fas fa-check"></i>
+    <p>Unduh Laporan</p>
+  </a>
+</li>
 
 <li class="nav-item" hidden>
   <a href="<?php echo base_url('promo'); ?>">

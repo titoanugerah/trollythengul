@@ -6,7 +6,7 @@
         <h5 class="text-white op-7 mb-2"> Halaman panel pengelolaan pesanan</h5>
       </div>
       <div class="ml-md-auto py-2 py-md-0">
-        <a href="<?php echo base_url('downloadRecap'); ?>">Unduh Rekap Penjualan</a>
+        <a href="<?php echo base_url('downloadRecap'); ?>" class="btn btn-success btn-round">Unduh Rekap Penjualan</a>
       </div>
     </div>
   </div>

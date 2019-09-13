@@ -20,7 +20,7 @@ $route['detailAccount/(:any)/(:any)'] = 'admin/detailAccount/$1/$2';
 $route['paymentVerification'] = 'admin/paymentVerification';
 $route['redeemMerchant'] = 'admin/redeemMerchant';
 $route['redeem/(:any)'] = 'admin/redeem/$1';
-
+$route['downloadReport'] = 'admin/downloadReport';
 //MERCHANT AREA
 $route['product'] = 'merchant/product';
 $route['detailMyProduct/(:any)'] = 'merchant/detailMyProduct/$1';

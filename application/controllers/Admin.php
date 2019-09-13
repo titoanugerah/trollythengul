@@ -64,6 +64,10 @@ class Admin extends CI_Controller
     $this->admin_model->redeem($id);
   }
 
+  public function downloadReport()
+  {
+    $this->admin_model->downloadReport();
+  }
 
 }
 
