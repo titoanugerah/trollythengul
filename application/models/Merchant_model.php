@@ -6,7 +6,7 @@ class Merchant_model extends CI_Model
 
   function __construct()
   {
-
+    $this->load->library('Excel');
   }
 
   //CORE
@@ -289,6 +289,57 @@ class Merchant_model extends CI_Model
     $this->createLog(4,'a', $this->session->userdata['merchant'], $data);
     notify('Sukses', 'Pesanan berhasil dikirim', 'success', 'fas fa-shipping-fast', 'order');
   }
+
+  public function downloadRecap()
+    {
+      $objPHPExcel = new PHPExcel();
+      //INFO AND DETAILS
+      $objPHPExcel->getProperties()
+      ->setCreator("Tito Anugerah")
+      ->setLastModifiedBy("Tito Anugerah")
+      ->setTitle("Rekap Pembelian")
+      ->setSubject($this->session->userdata['merchant'])
+      ->setDescription("TrollyThengul")
+      ->setKeywords("Laporan Penjualan")
+      ->setCategory("private");
+
+      $objPHPExcel->setActiveSheetIndex(0)
+      ->setCellValue('A1', 'No')
+      ->setCellValue('B1', 'Tanggal' )
+      ->setCellValue('C1', 'Nama Barang' )
+      ->setCellValue('D1', 'Pembeli' )
+      ->setCellValue('E1', 'Harga')
+      ->setCellValue('F1', 'QTY' )
+      ->setCellValue('G1', 'Subtotal' )
+      ;
+      $row = 2;  $i=1;
+      $data = $this->db->query('select * from view_detail_order where id_merchant='.$this->session->userdata['id'].' order by date_order desc')->result();
+      foreach ($data as $data) : if($data->status <5){continue;}
+        //SET VALUE
+        $objPHPExcel->setActiveSheetIndex(0)
+        ->setCellValue('A'.$row, $i)
+        ->setCellValue('B'.$row, $data->date_order)
+        ->setCellValue('C'.$row, $data->product)
+        ->setCellValue('D'.$row, $data->fullname)
+        ->setCellValue('E'.$row, $data->price)
+        ->setCellValue('F'.$row, $data->qty)
+        ->setCellValue('G'.$row, $data->subtotal);
+        $row++;$i++;
+      endforeach;
+      //FORMATING
+      header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      header("Content-Disposition: attachment; filename=Rincian_Pembelian.xls");
+      header('Cache-Control: max-age=0');
+      header ('Expires: Mon, 26 Jul 2019 05:00:00 GMT'); // Date in the past
+      header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+      header ('Cache-Control: no-cache, must-revalidate'); // HTTP/1.1
+      header ('Pragma: public'); // HTTP/1.0
+      $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+      $objWriter->save('php://output');
+      return true;
+
+  }
+
 
 }
 

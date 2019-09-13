@@ -44,5 +44,10 @@ class Merchant extends CI_Controller
     $this->load->view('template', $this->merchant_model->cOrder());
   }
 
+  public function downloadRecap()
+  {
+    $this->merchant_model->downloadRecap();
+  }
+
 }
 ?>
