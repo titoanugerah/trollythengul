@@ -29,7 +29,6 @@
       <form  method="post">
 
         <div class="card-body">
-
           <!--Carousel Wrapper-->
           <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
             <!--Indicators-->
