@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-4 pl-0 text-right">
                   <h3 class="fw-bold mb-1"><?php echo $item->due_date; ?></h3>
-                  <div class="text-small text-uppercase fw-bold op-8"><?php if($item->status==0){echo 'Nonaktif';} elseif($item->available==0){echo 'Penuh';}elseif($item->status==1){echo 'Aktif';} ?></div>
+                  <div class="text-small text-uppercase fw-bold op-8"><?php if($item->status==0){echo 'Nonaktif';} elseif($item->available==0){echo 'Penuh';}elseif($item->deadline<0){echo 'Waktu Habis';}elseif($item->status==1){echo 'Aktif';} ?></div>
                 </div>
               </div>
             </div>
