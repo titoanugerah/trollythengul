@@ -30,7 +30,7 @@
       <div class="col-lg-3">
         <div class="card">
           <div class="p-2">
-            <img class="card-img-top rounded" src="<?php echo base_url('./assets/upload/'.$item->image); ?>" alt="Product 1" style="height: 140px;">
+            <img class="card-img-top rounded" src="<?php echo base_url('./assets/upload/'.$item->image); ?>" alt="Product 1" style="max-height: 140px; min-width: : 120px">
           </div>
           <div class="card-body pt-2">
             <h4 class="mb-1 fw-bold"><?php echo $item->product; ?></h4>
