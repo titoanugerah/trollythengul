@@ -85,7 +85,7 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $item->product ?></td>
                     <td><?php echo $item->merchant; ?></td>
-                    <td> <a href="<?php echo base_url('detailProduct/'.$item->id); ?>" class="btn btn-info"> Detail </a> </td>
+                    <td> <a href="<?php echo base_url('detailProduct/'.$item->id_product); ?>" class="btn btn-info"> Detail </a> </td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>
