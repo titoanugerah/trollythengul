@@ -19,7 +19,8 @@
       <?php $style = array(0 => 'skew-shadow', 1 => 'bubble-shadow', 2=> 'curves-shadow'); foreach ($promo as $item): //if($item->status==0){continue;} ?>
         <div class="col-md-4">
           <a data-toggle="modal" data-target="#detailPromo<?php echo $item->id;?>">
-          <div class="card card-dark bg-<?php if($item->usage==0 && $item->status==1){echo 'success';}elseif($item->available==0 or $item->deadline<=0 or $item->status==0 ){echo 'danger';}elseif($item->available<=(($item->qty)/4)){echo 'warning';}else{echo 'secondary';}  ?>-gradient">
+            <?php //if($item->used==0) ?>
+          <div class="card card-dark bg-<?php if($item->available==0 or $item->deadline<=0 or $item->status==0 ){echo 'danger';}elseif($item->available<=(($item->qty)/5)){echo 'warning';}elseif ($item->used==0 && $item->status==1){echo 'success';}else{echo 'secondary';}  ?>-gradient">
             <div class="card-body <?php echo $style[rand(0,2)] ?>">
               <img src="<?php echo base_url('./assets/template/AtlantisLite/'); ?>/assets/img/promo.png" height="39" alt="Visa Logo">
               <h2 class="py-4 mb-0"><?php echo '*'.$item->promo_code.'*'; ?></h2>
