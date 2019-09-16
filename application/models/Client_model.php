@@ -243,6 +243,7 @@ class Client_model extends CI_Model
 
   public function cPayment($id)
   {
+    $this->updateData('order', 'id', $id, 'unique', rand(1,999));
     $data['destination'] = $this->getCity();
     $data['order'] = $this->getDataRow('view_order', 'id', $id);
     $data['promo'] = $this->getDataRow('view_promo', 'promo_code', $data['order']->promo_code);
