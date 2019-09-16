@@ -73,8 +73,6 @@
                   </div>
                 </div>
               </div>
-
-
             </form>
           </div>
         </div>
@@ -98,15 +96,15 @@
               <div class="form-group col-4 col-md-4">
                 <label>Kurir Pengiriman</label> &nbsp;&nbsp;&nbsp;&nbsp;<br>
                 <select class="select2basic form-control" name="courier" style="width:360px">
-                  <option value="jne/0" <?php if($order->courier=="jne"){echo 'selected';} ?>>JNE - OKE</option>
-                  <option value="jne/1" <?php if($order->courier=="jne"){echo 'selected';} ?>>JNE - Reguler</option>
-                  <option value="jne/2" <?php if($order->courier=="jne"){echo 'selected';} ?>>JNE - SPS</option>
-                  <option value="jne/3" <?php if($order->courier=="jne"){echo 'selected';} ?>>JNE - YES</option>
-                  <option value="pos/0" <?php if($order->courier=="pos"){echo 'selected';} ?>>POS Indonesia - Kilat Khusus (1-2 Hari)</option>
-                  <option value="pos/1" <?php if($order->courier=="pos"){echo 'selected';} ?>>POS Indonesia - Express Next Day(1 Hari)</option>
-                  <option value="tiki/0" <?php if($order->courier=="tiki"){echo 'selected';} ?>>TIKI - ONS</option>
-                  <option value="tiki/1" <?php if($order->courier=="tiki"){echo 'selected';} ?>>TIKI - Reguler</option>
-                  <option value="tiki/2" <?php if($order->courier=="tiki"){echo 'selected';} ?>>TIKI - Economy</option>
+                  <option value="jne/0" <?php if($order->courier=="jne/0"){echo 'selected';} ?>>JNE - OKE</option>
+                  <option value="jne/1" <?php if($order->courier=="jne/1"){echo 'selected';} ?>>JNE - Reguler</option>
+                  <option value="jne/2" <?php if($order->courier=="jne/2"){echo 'selected';} ?>>JNE - SPS</option>
+                  <option value="jne/3" <?php if($order->courier=="jne/3"){echo 'selected';} ?> hidden>JNE - YES</option>
+                  <option value="pos/1" <?php if($order->courier=="pos/1"){echo 'selected';} ?>>POS Indonesia - Express Next Day(1 Hari)</option>
+                  <option value="pos/0" <?php if($order->courier=="pos/0"){echo 'selected';} ?>>POS Indonesia - Kilat Khusus (1-2 Hari)</option>
+                  <option value="tiki/0" <?php if($order->courier=="tiki/0"){echo 'selected';} ?>>TIKI - ONS</option>
+                  <option value="tiki/1" <?php if($order->courier=="tiki/1"){echo 'selected';} ?>>TIKI - Reguler</option>
+                  <option value="tiki/2" <?php if($order->courier=="tiki/2"){echo 'selected';} ?>>TIKI - Economy</option>
                 </select>
               </div>
             </div>
