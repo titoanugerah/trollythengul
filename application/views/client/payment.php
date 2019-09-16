@@ -99,7 +99,7 @@
                   <option value="jne/0" <?php if($order->courier=="jne/0"){echo 'selected';} ?>>JNE - OKE</option>
                   <option value="jne/1" <?php if($order->courier=="jne/1"){echo 'selected';} ?>>JNE - Reguler</option>
                   <option value="jne/2" <?php if($order->courier=="jne/2"){echo 'selected';} ?>>JNE - SPS</option>
-                  <option value="jne/3" <?php if($order->courier=="jne/3"){echo 'selected';} ?> hidden>JNE - YES</option>
+
                   <option value="pos/1" <?php if($order->courier=="pos/1"){echo 'selected';} ?>>POS Indonesia - Express Next Day(1 Hari)</option>
                   <option value="pos/0" <?php if($order->courier=="pos/0"){echo 'selected';} ?>>POS Indonesia - Kilat Khusus (1-2 Hari)</option>
                   <option value="tiki/0" <?php if($order->courier=="tiki/0"){echo 'selected';} ?>>TIKI - ONS</option>
