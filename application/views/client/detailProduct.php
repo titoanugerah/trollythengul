@@ -84,25 +84,30 @@
               <label>Harga (IDR)</label>
               <input type="number" class="form-control"  name="price" value="<?php echo $product->price; ?>" readonly>
             </div>
+            <div class="form-group col-md-3">
+              <label>Stok</label>
+              <input type="number" class="form-control"  name="stock" value="<?php echo $product->last_stock; ?>" readonly>
+            </div>
 
-            <div class="form-group col-md-4">
+
+            <div class="form-group col-md-3">
               <label>Berat (Kilo)</label>
-              <input type="number" class="form-control"  name="weight" value="<?php echo $product->weight; ?>" readonly>
+              <input type="number" class="form-control"  name="weight" value="<?php echo $product->weight; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Panjang (cm)</label>
-              <input type="number" class="form-control"  name="size_length" value="<?php echo $product->size_length; ?>" readonly>
+              <input type="number" class="form-control"  name="size_length" value="<?php echo $product->size_length; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Lebar (cm)</label>
-              <input type="number" class="form-control"  name="size_width" value="<?php echo $product->size_width; ?>" readonly>
+              <input type="number" class="form-control"  name="size_width" value="<?php echo $product->size_width; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Tinggi (cm)</label>
-              <input type="number" class="form-control"  name="size_height" value="<?php echo $product->size_height; ?>" readonly>
+              <input type="number" class="form-control"  name="size_height" value="<?php echo $product->size_height; ?>" required>
             </div>
           </div>
         </div>
