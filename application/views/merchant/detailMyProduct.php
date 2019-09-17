@@ -9,6 +9,7 @@
         <a href="<?php echo base_url('product'); ?>" class="btn btn-success btn-round">Kembali ke Produk</a>
         <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-round">Tambahkan Foto</button>
         <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-danger btn-round">Hapus Produk</button>
+        <button type="button" data-toggle="modal" data-target="#myModal3" class="btn btn-warning">Tambah Stok</button>
 
       </div>
     </div>
@@ -58,22 +59,28 @@
               <input type="number" class="form-control"  name="price" value="<?php echo $product->price; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
+              <label>Stok</label>
+              <input type="number" class="form-control"  name="stock" value="<?php echo $product->last_stock; ?>" readonly>
+            </div>
+
+
+            <div class="form-group col-md-3">
               <label>Berat (Kilo)</label>
               <input type="number" class="form-control"  name="weight" value="<?php echo $product->weight; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Panjang (cm)</label>
               <input type="number" class="form-control"  name="size_length" value="<?php echo $product->size_length; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Lebar (cm)</label>
               <input type="number" class="form-control"  name="size_width" value="<?php echo $product->size_width; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Tinggi (cm)</label>
               <input type="number" class="form-control"  name="size_height" value="<?php echo $product->size_height; ?>" required>
             </div>
@@ -228,6 +235,32 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger" name="deleteProduct" value="deleteProduct">Hapus Produk</button>
+          <button type="button" class="btn btn-grey" data-dismiss="modal">Kembali</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+          <h4>Tambah Stok</h4>
+        </center>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form role="form" method="post">
+        <div class="modal-body">
+          <p>Masukan tambahan stok</p>
+          <div class="form-group col-6 col-md-12">
+            <input type="number" name="stock_add" class="form-control" placeholder="masukan stok baru anda">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger" name="addStock" value="addStock">Tambah Stock</button>
           <button type="button" class="btn btn-grey" data-dismiss="modal">Kembali</button>
         </div>
       </form>

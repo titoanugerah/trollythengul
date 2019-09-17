@@ -194,7 +194,16 @@ class Merchant_model extends CI_Model
     'id_attachment' => 'no.jpg'
     );
     $this->db->insert('product', $data);
-    notify('Sukses', 'Proses penambahan berhasil dilakukan, silahkan tambahkan gambar pada kolom gambar', 'success', 'fas fa-plus', 'detailMyProduct/'.$this->db->insert_id());
+    $id = $this->db->insert_id();
+    $this->db->insert('stock_add', $data = array('id_product' => $this->db->insert_id(), 'stock_add' => $this->input->post('stock')));
+    notify('Sukses', 'Proses penambahan berhasil dilakukan, silahkan tambahkan gambar pada kolom gambar', 'success', 'fas fa-plus', 'detailMyProduct/'.$id);
+  }
+
+  public function addStock($id)
+  {
+    $this->db->insert('stock_add', $data = array('id_product' => $id, 'stock_add' => $this->input->post('stock_add')));
+    notify('Sukses', 'Proses penambahan stok berhasil dilakukan', 'success', 'fas fa-plus', 'detailMyProduct/'.$id);
+
   }
 
   public function addImage($id)

@@ -55,21 +55,27 @@
             </div>
 
             <div class="form-group col-md-4">
+              <label>Jumlah Stok Awal</label>
+              <input type="number" class="form-control"  name="stock" value="" required>
+            </div>
+
+
+            <div class="form-group col-md-3">
               <label>Berat (Kilo)</label>
               <input type="number" class="form-control"  name="weight" value="" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Panjang (cm)</label>
               <input type="number" class="form-control"  name="size_length" value="" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Lebar (cm)</label>
               <input type="number" class="form-control"  name="size_width" value="" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Tinggi (cm)</label>
               <input type="number" class="form-control"  name="size_height" value="" required>
             </div>

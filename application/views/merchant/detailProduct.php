@@ -88,29 +88,28 @@
               <input type="number" class="form-control"  name="price" value="<?php echo $product->price; ?>" readonly>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Berat (Kilo)</label>
               <input type="number" class="form-control"  name="weight" value="<?php echo $product->weight; ?>" readonly>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Panjang (cm)</label>
               <input type="number" class="form-control"  name="size_length" value="<?php echo $product->size_length; ?>" readonly>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Lebar (cm)</label>
               <input type="number" class="form-control"  name="size_width" value="<?php echo $product->size_width; ?>" readonly>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>Tinggi (cm)</label>
               <input type="number" class="form-control"  name="size_height" value="<?php echo $product->size_height; ?>" readonly>
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-info"  name="updateProduct" value="updateProduct">Update Produk</button>
         </div>
       </form>
     </div>
