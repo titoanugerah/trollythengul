@@ -337,8 +337,10 @@ class General_model extends CI_Model
   {
     if ($this->session->userdata['role']=='merchant') {
       $data['sales'] = $this->db->query('select count(*) as sales, sum(shipment_fee+price) as profit, ifnull((sum(rating)/count(*)),0) as rating, count(distinct(id_customer)) as buyer from view_detail_order where id_merchant='.$this->session->userdata['id'].' and status>4')->row();
+      $data['graph'] = $this->db->query('select count(a.id) as sold,  MONTHname(b.date_order) as date from  detail_order as a, `order` as b where a.id_order = b.id and YEAR(b.date_order) = Year(now()) and a.id_merchant = '.$this->session->userdata['id'].' group by month(b.date_order) order by month(b.date_order)')->result();
     } else if ($this->session->userdata['role']=='admin') {
       $data['sales'] = $this->db->query('select count(*) as sales, sum(shipment_fee+price) as profit, ifnull((sum(rating)/count(*)),0) as rating, count(distinct(id_customer)) as buyer from view_detail_order where status>4')->row();
+      $data['graph'] = $this->db->query('select count(a.id) as sold, MONTHname(b.date_order) as date from  detail_order as a, `order` as b where a.id_order = b.id and YEAR(b.date_order) = Year(now()) group by month(b.date_order) order by month(b.date_order)')->result();
     }
 
     $data['view_name'] = 'dashboard';

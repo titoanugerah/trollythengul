@@ -1,3 +1,9 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+
 <div class="page-inner">
   <div class="row">
     <div class="col-sm-6 col-md-3">
@@ -76,5 +82,51 @@
         </div>
       </div>
     </div>
+
+
   </div>
+  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 </div>
+<script>
+Highcharts.chart('container', {
+
+    title: {
+        text: 'Grafik Penjualan Per Bulan'
+    },
+    yAxis: {
+        title: {
+            text: 'Penjualan'
+        }
+    },
+    xAxis: {
+      categories: [<?php foreach($graph as $item){echo '"'.$item->date.'"'.',';} ?>]
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+
+    series: [{
+        name: 'Produk Terjual',
+        data: [<?php foreach($graph as $item){echo $item->sold.',';} ?>]
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+</script>
