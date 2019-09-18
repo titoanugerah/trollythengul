@@ -293,6 +293,7 @@ class admin_model extends CI_Model
   {
     $order = $this->getDataRow('view_order', 'id', $this->input->post('id'));
     $this->updateData('order', 'id', $this->input->post('id'), 'status', 2);
+    $this->updateData('detail_order', 'id_order', $this->input->post('id'), 'status', 2);
     $content = "bersamaan dengan email ini kami informasikan bahwa pembayaran anda sudah diverifikasi oleh pihak admin, selanjutnya tunggulah konfirmasi dari penjual";
     $content2 = "bersamaan dengan ini kami sampaikan bahwa terdapat 1 pesanan yang perlu dikonfirmasi, silahkan kunjugi website kami";
     $this->sentEmail($order->email, $order->fullname, 'Pembayaran kamu telah diverifikasi', $content);

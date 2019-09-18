@@ -53,7 +53,7 @@
               </div>
               <div class="col-7">
                 <?php
-                if($item->status==0|$item->status==1){$status = 'Menunggu verifikasi dari admin';}elseif($item->status==2){$status = 'Menunggu dikonfirmasi oleh toko';} ?>
+                if($item->status==0){$status="Barang masuk keranjang";}elseif($item->status==1){$status = 'Menunggu verifikasi dari admin';}elseif($item->status==2){$status = 'Menunggu dikonfirmasi oleh toko';} ?>
                 <strong style="color:green;"><?php echo $status; ?></strong>
               </div>
             </div>

@@ -27,7 +27,7 @@
 
   <div class="col-12">
     <?php foreach ($order as $item): if($item->status!=2){continue;}  ?>
-      <div class="col-lg-3">
+      <div class="col-lg-6">
         <div class="card">
           <div class="p-2">
             <img class="card-img-top rounded" src="<?php echo base_url('./assets/upload/'.$item->image); ?>" alt="Product 1" style="max-height: 140px; min-width: : 120px">
