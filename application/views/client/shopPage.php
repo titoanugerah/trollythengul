@@ -24,11 +24,11 @@
   </ol>
   <div class="carousel-inner">
     <?php $j=0;foreach ($promote as $item): ?>
-      <a data-toggle="modal" data-target="#detailPromote<?php echo $item->id;?>">
       <div class="carousel-item <?php if($j==0){echo 'active';} ?>">
+        <a data-toggle="modal" data-target="#detailPromote<?php echo $item->id;?>">
         <img class="d-block w-100" src="<?php echo base_url('./assets/upload/'.$item->image); ?>"  alt="slide<?php echo $j;  ?>" style="max-height:300px">
-      </div>
       </a>
+      </div>
     <?php $j++;endforeach; ?>
 
   </div>
