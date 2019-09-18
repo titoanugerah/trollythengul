@@ -203,6 +203,7 @@ class General_model extends CI_Model
   //APPLICATION
   public function cShopPage($keyword, $page)
   {
+    $data['promote'] = $this->getAllData('post');
     $data['product'] = $this->db->query('select * from view_product where fullname LIKE "%'.$keyword.'%" or merchant LIKE "%'.$keyword.'%" or product LIKE "%'.$keyword.'%" or description LIKE "%'.$keyword.'%" or category LIKE "%'.$keyword.'%" order by rating desc limit '.($page*50).','.(($page*50)+50))->result();
     $data['category'] = $this->getAllData('category');
     $data['view_name'] = 'shopPage';

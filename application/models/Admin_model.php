@@ -71,6 +71,11 @@ class admin_model extends CI_Model
     return $upload;
   }
 
+  public function deleteData($table, $whereVar, $whereVal)
+  {
+    $this->db->delete($table, $where = array($whereVar =>$whereVal ));
+  }
+
   //functional
   public function sentEmail($to, $fullname, $subject, $content)
   {
@@ -145,6 +150,22 @@ class admin_model extends CI_Model
   {
     if (md5($this->input->post('password'))==$this->session->userdata['password']){$this->updateData('category', 'id', $this->input->post('id'), 'status', 0); notify('Berhasil Terhapus', 'Kategori berhasil dihapus ', 'success', 'fas fa-trash', null);}
     else {notify('Gagal', 'Proses penghapusan kategori gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', null);}
+  }
+
+  public function deletePromote()
+  {
+    if (md5($this->input->post('password'))==$this->session->userdata['password']){$this->deleteData('post', 'id', $this->input->post('id')); notify('Berhasil Terhapus', 'Promosi berhasil dihapus ', 'success', 'fas fa-trash', 'promote');}
+    else {notify('Gagal', 'Proses penghapusan promosi gagal, password yang anda masukan tidak cocok', 'danger', 'fas fa-user-times', null);}
+  }
+
+  public function updatePromote()
+  {
+    $data = array(
+      'title' => $this->input->post('title'),
+      'description' => $this->input->post('description'),
+     );
+     $this->db->where($where = array('id' => $this->input->post('id') ));
+     $this->db->update('post', $data);
   }
 
   public function recoverCategory()
@@ -353,7 +374,23 @@ class admin_model extends CI_Model
 
   }
 
+  public function addPromote()
+  {
+    $this->db->insert('post', $data = array('title' =>$this->input->post('title'), 'description' => $this->input->post('description')));
+    $id = $this->db->insert_id();
+    $this->updateData('post', 'id', $id, 'image', 'post_'.$id.$this->uploadFile('post_'.$id,'jpg|png|jpeg')['ext']);
+    notify('Sukses', 'Proses tambah promosi berhasil dilakukan', 'success', 'fas fa-user-check','promote');
 
+  }
+
+  public function cPromote()
+  {
+    $data['promote'] = $this->getAllData('post');
+    $data['view_name'] = 'promote';
+    $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
+    return $data;
+
+  }
 }
 
  ?>

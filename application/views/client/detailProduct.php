@@ -84,6 +84,7 @@
               <label>Harga (IDR)</label>
               <input type="number" class="form-control"  name="price" value="<?php echo $product->price; ?>" readonly>
             </div>
+
             <div class="form-group col-md-3">
               <label>Stok</label>
               <input type="number" class="form-control"  name="stock" value="<?php echo $product->last_stock; ?>" readonly>
@@ -92,22 +93,22 @@
 
             <div class="form-group col-md-3">
               <label>Berat (Kilo)</label>
-              <input type="number" class="form-control"  name="weight" value="<?php echo $product->weight; ?>" required>
+              <input type="number" class="form-control"  name="weight" value="<?php echo $product->weight; ?>" disabled>
             </div>
 
             <div class="form-group col-md-3">
               <label>Panjang (cm)</label>
-              <input type="number" class="form-control"  name="size_length" value="<?php echo $product->size_length; ?>" required>
+              <input type="number" class="form-control"  name="size_length" value="<?php echo $product->size_length; ?>" disabled>
             </div>
 
             <div class="form-group col-md-3">
               <label>Lebar (cm)</label>
-              <input type="number" class="form-control"  name="size_width" value="<?php echo $product->size_width; ?>" required>
+              <input type="number" class="form-control"  name="size_width" value="<?php echo $product->size_width; ?>" disabled>
             </div>
 
             <div class="form-group col-md-3">
               <label>Tinggi (cm)</label>
-              <input type="number" class="form-control"  name="size_height" value="<?php echo $product->size_height; ?>" required>
+              <input type="number" class="form-control"  name="size_height" value="<?php echo $product->size_height; ?>" disabled>
             </div>
           </div>
         </div>

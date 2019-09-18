@@ -13,6 +13,34 @@
     </div>
   </div>
 </div>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <?php $i=0;foreach ($promote as $item): ?>
+
+    <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i; ?>" class="<?php if ($i==0){echo 'active';} ?>"></li>
+  <?php $i++;endforeach; ?>
+
+  </ol>
+  <div class="carousel-inner">
+    <?php $j=0;foreach ($promote as $item): ?>
+      <div class="carousel-item <?php if($j==0){echo 'active';} ?>">
+        <img class="d-block w-100" src="<?php echo base_url('./assets/upload/'.$item->image); ?>"  alt="slide<?php echo $j;  ?>">
+      </div>
+    <?php $j++;endforeach; ?>
+
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+
 <div class="page-inner mt--5">
   <div class="row">
     <?php foreach ($product as $product):  ?>

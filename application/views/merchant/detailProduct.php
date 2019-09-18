@@ -40,11 +40,11 @@
             <!--Slides-->
             <div class="carousel-inner" role="listbox">
               <?php $i=0;foreach ($attachment1 as $item): ?>
-                <div class="carousel-item active">
+                <div class="carousel-item <?php if($i==0) {echo 'active';} ?>">
                   <img class="d-block w-100" src="<?php echo base_url('./assets/upload/'.$item->image); ?>"
                   alt="First slide">
                 </div>
-              <?php endforeach; $i++;?>
+              <?php $i++; endforeach; ?>
 
             </div>
             <!--/.Slides-->
@@ -89,23 +89,29 @@
             </div>
 
             <div class="form-group col-md-3">
+              <label>Stok</label>
+              <input type="number" class="form-control"  name="stock" value="<?php echo $product->last_stock; ?>" readonly>
+            </div>
+
+
+            <div class="form-group col-md-3">
               <label>Berat (Kilo)</label>
-              <input type="number" class="form-control"  name="weight" value="<?php echo $product->weight; ?>" readonly>
+              <input type="number" class="form-control"  name="weight" value="<?php echo $product->weight; ?>" disabled>
             </div>
 
             <div class="form-group col-md-3">
               <label>Panjang (cm)</label>
-              <input type="number" class="form-control"  name="size_length" value="<?php echo $product->size_length; ?>" readonly>
+              <input type="number" class="form-control"  name="size_length" value="<?php echo $product->size_length; ?>" disabled>
             </div>
 
             <div class="form-group col-md-3">
               <label>Lebar (cm)</label>
-              <input type="number" class="form-control"  name="size_width" value="<?php echo $product->size_width; ?>" readonly>
+              <input type="number" class="form-control"  name="size_width" value="<?php echo $product->size_width; ?>" disabled>
             </div>
 
             <div class="form-group col-md-3">
               <label>Tinggi (cm)</label>
-              <input type="number" class="form-control"  name="size_height" value="<?php echo $product->size_height; ?>" readonly>
+              <input type="number" class="form-control"  name="size_height" value="<?php echo $product->size_height; ?>" disabled>
             </div>
           </div>
         </div>

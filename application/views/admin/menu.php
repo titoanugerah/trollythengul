@@ -1,3 +1,11 @@
+<li class="nav-item <?php if($view_name=='dashboard'){echo 'active';} ?>">
+  <a href="<?php echo base_url('dashboard'); ?>">
+    <i class="fas fa-home"></i>
+    <p>Dasbor</p>
+  </a>
+</li>
+
+
 <li class="nav-item <?php if($view_name=='webconf' || $view_name=='category'){echo 'active';} ?>">
   <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
     <i class="fas fa-home"></i>
@@ -55,9 +63,17 @@
   </a>
 </li>
 
+<li class="nav-item <?php if($view_name=='promote'){echo 'active';} ?>">
+  <a href="<?php echo base_url('promote'); ?>">
+    <i class="fas fa-list"></i>
+    <p>Promosi</p>
+  </a>
+</li>
+
+
 <li class="nav-item <?php if($view_name=='downloadReport'){echo 'active';}  ?>">
   <a href="<?php echo base_url('downloadReport'); ?>">
-    <i class="fas fa-check"></i>
+    <i class="fas fa-download"></i>
     <p>Unduh Laporan</p>
   </a>
 </li>

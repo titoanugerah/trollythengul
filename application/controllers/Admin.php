@@ -18,6 +18,14 @@ class Admin extends CI_Controller
     $this->load->view('template', $this->admin_model->cCategory());
   }
 
+  public function promote()
+  {
+    if($this->input->post('addPromote')){$this->admin_model->addPromote();}
+    elseif($this->input->post('deletePromote')){$this->admin_model->deletePromote();}
+    elseif($this->input->post('updatePromote')){$this->admin_model->updatePromote();}
+    $this->load->view('template', $this->admin_model->cPromote());
+  }
+
   public function promo()
   {
     if ($this->input->post('createPromo')) {$this->admin_model->createPromo();}
