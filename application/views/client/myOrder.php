@@ -18,6 +18,7 @@
       <a class="nav-link mr-5" data-toggle="tab" href="#tab2">Diproses Toko</a>
       <a class="nav-link mr-5" data-toggle="tab" href="#tab3">Dikirim</a>
       <a class="nav-link mr-5" data-toggle="tab" href="#tab4">Diterima</a>
+      <a class="nav-link mr-5" data-toggle="tab" href="#tab5">Ditolak</a>
 
     </div>
   </div>
@@ -28,7 +29,7 @@
     <div class="col-md-12 row">
       <div class="col-md-12">
         <br>
-        <?php foreach ($detailOrder as $item): if($item->status>=3){continue;} ?>
+        <?php foreach ($detailOrder as $item): if($item->status>=3 || $item->status<0){continue;} ?>
           <div class="card col-md-6">
             <div class="card-body">
               <div class="row">
@@ -102,6 +103,46 @@
 
     </div>
   </div>
+  <div class="tab-pane fade show" id="tab5" role="tabpanel" >
+    <div class="col-md-12 row">
+      <div class="col-md-12">
+        <br>
+        <?php foreach ($detailOrder as $item): if($item->status>=0){continue;} ?>
+          <div class="card col-md-6">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5 pl-2">
+                  <a href="<?php echo base_url('detailProduct/'.$item->id_product); ?>">
+                    <img src="<?php echo base_url('./assets/upload/'.$item->image); ?>" alt="" style="max-width:180px;" class="rounded">
+                  </a>
+                </div>
+
+                <div class="col-7 pl-1">
+                  <strong><?php echo $item->product; ?></strong><br>
+                  <strong>Pesanan Khusus &nbsp;&nbsp;&nbsp;: <?php echo $item->special_request; ?></strong><br>
+                  <strong>Jumlah Pesanan &nbsp;&nbsp;&nbsp;: <?php echo $item->qty.' buah'; ?></strong><br>
+                  <strong>Total &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Rp.<?php echo number_format($item->price*$item->qty,'2',',','.'); ?></strong>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer row">
+              <div class="col-4">
+                <?php echo $item->merchant; ?>
+
+              </div>
+              <div class="col-8">
+                <?php
+                if($item->status==-2){$status = 'Pesanan ditolak oleh Toko';} elseif($item->status==-1){$status = 'Pembayaran ditolak oleh Admin';} ?>
+                <strong style="color:green;"><?php echo $status; ?></strong>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+    </div>
+  </div>
+
   <div class="tab-pane fade show" id="tab3" role="tabpanel" >
     <div class="col-md-12 row">
       <div class="col-md-12">

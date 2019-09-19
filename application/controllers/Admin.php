@@ -58,7 +58,7 @@ class Admin extends CI_Controller
   public function paymentVerification()
   {
     if ($this->input->post('approvePayment')) {$this->admin_model->approvePayment();}
-    elseif ($this->input->post('approvePayment')) {$this->admin_model->approvePayment();}
+    elseif ($this->input->post('declinePayment')) {$this->admin_model->declinePayment();}
     $this->load->view('template', $this->admin_model->cPaymentVerification());
   }
 

@@ -307,6 +307,17 @@ class admin_model extends CI_Model
 
   }
 
+
+    public function declinePayment()
+    {
+      $order = $this->getDataRow('view_order', 'id', $this->input->post('id'));
+      $this->updateData('order', 'id', $this->input->post('id'), 'status', -1);
+      $this->updateData('detail_order', 'id_order', $this->input->post('id'), 'status', -1);
+      $content = "bersamaan dengan email ini kami informasikan bahwa pembayaran anda dinyatakan tidak sah oleh Admin, silahkan lakukan perbelanjaan kembali";
+      $this->sentEmail($order->email, $order->fullname, 'Pembayaran kamu ditolak', $content);
+    }
+
+
   public function cRedeemMerchant()
   {
     $data['redeem'] = $this->getAllData('view_redeem_merchant');

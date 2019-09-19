@@ -284,6 +284,18 @@ class Merchant_model extends CI_Model
     notify('Sukses', 'Pesanan sudah dikonfirmasi', 'success', 'fas fa-plus', 'order');
   }
 
+  public function declineOrder()
+  {
+    $this->updateData('detail_order', 'id', $this->input->post('id'), 'status', -2);
+    $order = $this->getDataRow('view_detail_order', 'id', $this->input->post('id'));
+    $content = 'Bersamaan dengan email ini kami sampaikan bahwa terkait pesananan '.$this->input->post('product').', pihak toko telah menolak pesanan anda ';
+    $this->sentEmail($order->email, $order->fullname, 'Pesanan anda ditolak', $content);
+    $data['id_detail_order'] = $this->input->post('id');
+    $data['id_order'] = $order->id_order;
+    notify('Sukses', 'Pesanan ditolak', 'success', 'fas fa-plus', 'order');
+  }
+
+
   public function confirmSent()
   {
     $this->updateData('detail_order', 'id', $this->input->post('id'), 'status', 4);
