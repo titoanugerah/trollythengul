@@ -351,6 +351,7 @@ class General_model extends CI_Model
 
   public function cDetailProduct($id)
   {
+    $data['comment'] = $this->db->query('select id, comment, fullname, date_order  from view_detail_order where id_product='.$id.' and comment is not null limit 10')->result();
     $data['shipment'] = $this->db->query('select shipment_province, count(id) as shipment_count from view_detail_order where id_product= '.$id.' group by shipment_province')->result();
     $data['attachment'] = $this->getSomeData('attachment', 'id_product', $id);
     $data['attachment1'] = $this->getSomeData('attachment', 'id_product', $id);

@@ -170,21 +170,35 @@
     <div class="tab-pane fade show" id="tab3" role="tabpanel">
       <br>
       <center>
-        <h3>Overal Rating : <?php echo $product->rating; ?></h3>
-        <div class="col-md-12">
-          <br>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="progress progress">
-                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="<?php echo (int)$product->rating ?>" aria-valuemin="0" aria-valuemax="100"></div>
+      <div class="col-md-12">
+        <br>
+        <div class="row">
+          <div class="col-md-9">
+            <?php foreach ($comment as $item): ?>
+              <div class="card">
+                <div class="card-header">
+                  <?php echo $item->fullname.' pada  '.$item->date_order; ?>
+                </div>
+                <div class="card-body">
+                  <?php echo $item->comment; ?>
+                </div>
               </div>
+            <?php endforeach; ?>
 
-            </div>
+          </div>
+          <div class="col-md-3">
+            <h3>Overal Rating : <?php echo $product->rating; ?></h3>
+            <?php $star = (int)$product->rating; for ($i=0; $i <5 ; $i++) { if($star>0){$tag = 's';} else {$tag = 'r';}?>
+            <i class="fa<?php echo $tag;?> fa-star search-icon"></i>
+            <?php $star--;} ?>
+
+
           </div>
         </div>
-      </center>
+      </div>
+    </center>
     </div>
-    <div class="tab-pane fade show" id="tab4" role="tabpanel">
+       <div class="tab-pane fade show" id="tab4" role="tabpanel">
       <div class="table-responsive">
         <table id="multi-filter-select" class="display table table-striped table-hover" cellspacing="0" width="100%">
           <thead>
