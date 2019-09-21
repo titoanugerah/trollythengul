@@ -53,7 +53,7 @@ class Merchant_model extends CI_Model
     $config['overwrite'] = TRUE;
     $config['file_name']     =  str_replace(' ','_',$filename);
     $config['allowed_types'] = $allowedFile;
-    $this->db->where($where = array($whereVar => $whereVal));
+  //  $this->db->where($where = array($whereVar => $whereVal));
     $this->load->library('upload', $config);
     if (!$this->upload->do_upload('fileUpload')) {
       $upload['status']=0;
