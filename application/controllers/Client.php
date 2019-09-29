@@ -21,6 +21,11 @@ class Client extends CI_Controller
     $this->load->view('template', $this->client_model->cMyCart());
   }
 
+  public function checkout()
+  {
+    $this->load->view('client/checkout');
+  }
+
   public function payment($id)
   {
     if ($this->input->post('setDestination')) {$this->client_model->setDestination($id);}
