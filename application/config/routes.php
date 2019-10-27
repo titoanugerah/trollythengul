@@ -30,8 +30,10 @@ $route['setDefaultImage/(:any)/(:any)'] = 'merchant/setDefaultImage/$1/$2';
 $route['order'] = 'merchant/order';
 $route['downloadRecap'] = 'merchant/downloadRecap';
 //CLIENT AREA
+$route['finishOrder'] = 'client/finishOrder';
 $route['myCart'] = 'client/myCart';
 $route['payment/(:any)'] = 'client/payment/$1';
 $route['myOrder'] = 'client/myOrder';
 $route['StatusOrder/(:any)'] = 'client/StatusOrder/$1';
 $route['promoList'] = 'client/promoList';
+$route['checkout'] = 'client/checkout';

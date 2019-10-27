@@ -98,13 +98,13 @@
                 <select class="select2basic form-control" name="courier" style="width:360px">
                   <option value="jne/0" <?php if($order->courier=="jne/0"){echo 'selected';} ?>>JNE - OKE</option>
                   <option value="jne/1" <?php if($order->courier=="jne/1"){echo 'selected';} ?>>JNE - Reguler</option>
-                  <option value="jne/2" <?php if($order->courier=="jne/2"){echo 'selected';} ?>>JNE - SPS</option>
+                  
 
                   <option value="pos/1" <?php if($order->courier=="pos/1"){echo 'selected';} ?>>POS Indonesia - Express Next Day(1 Hari)</option>
                   <option value="pos/0" <?php if($order->courier=="pos/0"){echo 'selected';} ?>>POS Indonesia - Kilat Khusus (1-2 Hari)</option>
-                  <option value="tiki/0" <?php if($order->courier=="tiki/0"){echo 'selected';} ?>>TIKI - ONS</option>
+                  <option value="tiki/0" <?php if($order->courier=="tiki/0"){echo 'selected';} ?>>TIKI - Economy</option>
                   <option value="tiki/1" <?php if($order->courier=="tiki/1"){echo 'selected';} ?>>TIKI - Reguler</option>
-                  <option value="tiki/2" <?php if($order->courier=="tiki/2"){echo 'selected';} ?>>TIKI - Economy</option>
+                  
                 </select>
               </div>
             </div>
@@ -157,7 +157,16 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success">Lanjutkan Ke Pembayaran</button>
+            <button type="button" id="pay-button" class="btn btn-success">Lanjutkan Ke Pembayaran</button>
+          </div>
+           <div class="card-header">
+            <b>PERHATIAN !!</b>
+          </div>
+          <div class="col-md-10">
+            Screenshot bukti pembayaran 'berhasil' beserta id order dan nominal pembayaran agar proses pemesanan dapat berjalan
+          </div>
+         <div class="card-footer">
+            Upload bukti pembayaran <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success">Disini</button>
           </div>
         </div>
 
@@ -173,14 +182,14 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <center>
+       <!-- <center>
           <h4>Pembayaran</h4>
-        </center>
+        </center>-->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <form role="form" method="post" enctype="multipart/form-data">
-        <div class="modal-body">
-          Silahkan lakukan transfer sebanyak <b><?php echo 'Rp.'.number_format($order->subtotal,2,',','.'); ?></b> ke
+         <div class="modal-body">
+          <!--Silahkan lakukan transfer sebanyak <b><?php echo 'Rp.'.number_format($order->subtotal,2,',','.'); ?></b> ke
           <div class="row">
 
           <div class="form-group col-6 col-md-3">
@@ -198,8 +207,8 @@
             <input type="text" class="form-control" name="amount" value="<?php echo $order->subtotal; ?>" hidden>
 
           </div>
-        </div>
-        kemudian upload bukti pembayaran pada kolom dibawah ini
+        </div>-->
+        Upload Bukti Pembayaran
         <div class="form-group">
         </center>
         <input type="file" name="fileUpload" class="btn btn-primary" required>
@@ -216,4 +225,42 @@
   </div>
 </div>
 
-<script type="text/javascript" src="//rajaongkir.com/script/widget.js"></script>
+<script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-OB0r30WpR8NYSehn"></script>
+<script type="text/javascript">
+  document.getElementById('pay-button').onclick = function(){
+    // This is minimal request body as example.
+    // Please refer to docs for all available options: https://snap-docs.midtrans.com/#json-parameter-request-body
+    // TODO: you should change this gross_amount and order_id to your desire.
+    var requestBody =
+    {
+      transaction_details: {
+        gross_amount: <?php echo $order->subtotal; ?>,
+        // as example we use timestamp as order ID
+        order_id: <?php echo $order->id; ?>
+      }
+    }
+
+    getSnapToken(requestBody, function(response){
+      var response = JSON.parse(response);
+      console.log("new token response", response);
+      // Open SNAP payment popup, please refer to docs for all available options: https://snap-docs.midtrans.com/#snap-js
+      snap.pay(response.token);
+    })
+  };
+  /**
+  * Send AJAX POST request to checkout.php, then call callback with the API response
+  * @param {object} requestBody: request body to be sent to SNAP API
+  * @param {function} callback: callback function to pass the response
+  */
+  function getSnapToken(requestBody, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+      if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        callback(xmlHttp.responseText);
+      }
+    }
+    xmlHttp.open("post", "http://trollythengul.imatft.online/checkout");
+    xmlHttp.send(JSON.stringify(requestBody));
+  }
+</script>
+

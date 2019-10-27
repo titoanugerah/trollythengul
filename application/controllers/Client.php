@@ -21,6 +21,11 @@ class Client extends CI_Controller
     $this->load->view('template', $this->client_model->cMyCart());
   }
 
+  public function checkout()
+  {
+    $this->load->view('client/checkout');
+  }
+
   public function payment($id)
   {
     if ($this->input->post('setDestination')) {$this->client_model->setDestination($id);}
@@ -39,6 +44,11 @@ class Client extends CI_Controller
   public function promoList()
   {
     $this->load->view('template', $this->client_model->cPromoList());
+  }
+  
+  public function finishOrder(){
+      $this->client_model->finishOrder();
+      redirect(base_url('myOrder'));
   }
 }
 

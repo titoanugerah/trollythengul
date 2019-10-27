@@ -27,7 +27,9 @@
       <form  method="post">
 
         <div class="card-body">
-
+           <center>
+<div class="col-md-8">
+  
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
               <?php $i=0;foreach ($attachment as $item): ?>
@@ -53,6 +55,9 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
+       
+</div>
+ </center>
 
           <!--Carousel Wrapper-->
 
