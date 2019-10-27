@@ -1,14 +1,14 @@
 <li class="nav-item <?php if($view_name=='dashboard'){echo 'active';} ?>">
-  <a href="<?php echo base_url('dashboard'); ?>">
-    <i class="fas fa-home"></i>
-    <p>Dasbor</p>
-  </a>
+  
+    <a href="<?php echo base_url('dashboard'); ?>">
+      <i class="flaticon-home"></i>
+      <p>Dashboard</p>
+    </a>
+  
 </li>
-
-
 <li class="nav-item <?php if($view_name=='webconf' || $view_name=='category'){echo 'active';} ?>">
   <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
-    <i class="fas fa-home"></i>
+    <i class="flaticon-settings"></i>
     <p>Konfigurasi</p>
     <span class="caret"></span>
   </a>
@@ -37,43 +37,42 @@
 
 <li class="nav-item <?php if($view_name=='promo'){echo 'active';} ?>">
   <a href="<?php echo base_url('promo'); ?>">
-    <i class="far fa-credit-card"></i>
+    <i class="flaticon-price-tag"></i>
     <p>Promo</p>
   </a>
 </li>
 
 <li class="nav-item <?php if($view_name=='account' || $view_name == 'detailAccountMerchant' || $view_name == 'detailAccountCustomer'){echo 'active';}  ?>">
   <a href="<?php echo base_url('account/1'); ?>">
-    <i class="fas fa-user"></i>
+    <i class="flaticon-user"></i>
     <p>Akun</p>
   </a>
 </li>
 
 <li class="nav-item <?php if($view_name=='paymentVerification'){echo 'active';}  ?>">
   <a href="<?php echo base_url('paymentVerification'); ?>">
-    <i class="fas fa-check"></i>
+    <i class="flaticon-check"></i>
     <p>Verifikasi Pembayaran</p>
   </a>
 </li>
 
 <li class="nav-item <?php if($view_name=='redeemMerchant'){echo 'active';}  ?>">
   <a href="<?php echo base_url('redeemMerchant'); ?>">
-    <i class="fas fa-check"></i>
+    <i class="flaticon-success"></i>
     <p>Redeem Merchant</p>
   </a>
 </li>
 
 <li class="nav-item <?php if($view_name=='promote'){echo 'active';} ?>">
   <a href="<?php echo base_url('promote'); ?>">
-    <i class="fas fa-list"></i>
-    <p>Promosi</p>
+    <i class="flaticon-picture"></i>
+    <p>Slider</p>
   </a>
 </li>
 
-
 <li class="nav-item <?php if($view_name=='downloadReport'){echo 'active';}  ?>">
   <a href="<?php echo base_url('downloadReport'); ?>">
-    <i class="fas fa-download"></i>
+    <i class="flaticon-download"></i>
     <p>Unduh Laporan</p>
   </a>
 </li>

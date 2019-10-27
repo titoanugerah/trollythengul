@@ -55,6 +55,13 @@ class Client_model extends CI_Model
     return $this->db->update($table, $data = array($setVar=> $setVal));
   }
 
+  public function updateData2($table, $whereVar1, $whereVal1, $whereVar2, $whereVal2, $setVar, $setVal)
+  {
+     $this->db->where($table, $where = array($whereVar1 => $whereVal1,$whereVar2 => $whereVal2));
+    return $this->db->update($table, $data = array($setVar=> $setVal));
+  }
+
+
   public function uploadFile($filename,$allowedFile)
   {
     $config['upload_path'] = APPPATH.'../assets/upload/';
@@ -181,6 +188,11 @@ class Client_model extends CI_Model
     $data['B'] = rand(0,10);
     $data['result'] = $data['A'] + $data['B'];
     return $data;
+  }
+  
+  public function finishOrder(){
+      $this->updateData2('order','status',0, 'id_customer', $this->session->userdata['id'], 'status', 1);
+      
   }
 
 

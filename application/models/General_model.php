@@ -148,6 +148,7 @@ class General_model extends CI_Model
       'password' => $account->password,
       'fullname' => $account->fullname,
       'email' => $account->email,
+      'phone_number' => $account->phone_number,
       'role' => $account->role,
       'status' => $account->status,
       'join_date' => $account->join_date,
@@ -327,6 +328,9 @@ class General_model extends CI_Model
       if ($this->input->post('role')=='merchant') {
         $this->db->insert('merchant', $data = array('id' => $this->db->insert_id()));
       }
+       elseif($this->input->post('role')=='client') {
+        $this->db->insert('client', $data = array('id' => $this->db->insert_id()));
+      }
       $content = 'Akun anda berhasil dibuat silahkan login menggunakan password '.$newPassword;
       $this->sentEmail($this->input->post('email'), $this->input->post('username'), 'Selamat Datang Pengguna Baru', $content);
       notify('Berhasil', 'Akun anda berhasil dibuat, silahkan cek email anda untuk mendapatkan password','success','fas fa-smile-wink','login');
@@ -343,6 +347,10 @@ class General_model extends CI_Model
       $data['sales'] = $this->db->query('select count(*) as sales, sum(shipment_fee+price) as profit, ifnull((sum(rating)/count(*)),0) as rating, count(distinct(id_customer)) as buyer from view_detail_order where status>4')->row();
       $data['graph'] = $this->db->query('select count(a.id) as sold, MONTHname(b.date_order) as date from  detail_order as a, `order` as b where a.id_order = b.id and YEAR(b.date_order) = Year(now()) group by month(b.date_order) order by month(b.date_order)')->result();
     }
+     $data['order'] =$this->db->query('select * from view_detail_order where status=5 order by id desc')->result();
+    $data['order_proses'] =$this->db->query('select * from view_detail_order where status<5 order by id desc')->result();
+     $data['order_merchant'] =$this->db->query('select * from view_detail_order where id_merchant='.$this->session->userdata['id'].' and status=5 order by id desc')->result();
+    $data['order_proses_merchant'] =$this->db->query('select * from view_detail_order where id_merchant='.$this->session->userdata['id'].' and status<5 order by id desc')->result();
 
     $data['view_name'] = 'dashboard';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);

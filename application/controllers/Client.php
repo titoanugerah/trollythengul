@@ -45,6 +45,11 @@ class Client extends CI_Controller
   {
     $this->load->view('template', $this->client_model->cPromoList());
   }
+  
+  public function finishOrder(){
+      $this->client_model->finishOrder();
+      redirect(base_url('myOrder'));
+  }
 }
 
 

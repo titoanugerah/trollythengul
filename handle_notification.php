@@ -1,8 +1,10 @@
 <?php
 require_once(dirname(__FILE__) . '/Veritrans.php');
-Veritrans_Config::$isProduction = false;
-Veritrans_Config::$serverKey = 'SB-Mid-server-ZjPFb9_pRI28iWa2PZxK-vco';
+//Veritrans_Config::$isProduction = false;
+//Veritrans_Config::$serverKey = 'SB-Mid-server-ZjPFb9_pRI28iWa2PZxK-vco';
 
+Veritrans_Config::$isProduction = true;
+Veritrans_Config::$serverKey = 'Mid-server-2o4QII6m1zSsO11QlKsBQ8iQ';
 
 
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {

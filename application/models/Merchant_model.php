@@ -135,7 +135,7 @@ class Merchant_model extends CI_Model
   //APPLICATION
   public function cProduct()
   {
-    $data['product'] = $this->getAllData('view_product');
+    $data['product'] = $this->getSomeData('view_product', 'id_merchant', $this->session->userdata['id']);
     $data['deleted'] = $this->getSomeData2('view_product', 'id_merchant', $this->session->userdata['id'], 'status', 0);
     $data['view_name'] = 'product';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);

@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Login | <?php echo $webconf->office_name; ?></title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="https://themekita.com/demo-atlantis-bootstrap/livepreview/examples/assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="<?php echo base_url('./assets/template/AtlantisLite/'); ?>assets/img/t-icon1.ico" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
 	<script src="<?php echo base_url('./assets/template/newlogin'); ?>/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -26,6 +26,7 @@
 <body class="login">
 	<div class="wrapper wrapper-login">
 		<div class="container container-login animated fadeIn">
+		    <center><img src="<?php echo base_url('./assets/template/AtlantisLite/'); ?>assets/img/t-login.png" alt="navbar brand" class="navbar-brand"></center>
 			<h3 class="text-center">Masuk</h3>
 			<form  method="post">
 

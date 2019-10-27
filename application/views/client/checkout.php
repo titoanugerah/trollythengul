@@ -7,7 +7,7 @@
    $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://app.sandbox.midtrans.com/snap/v1/transactions",
+  CURLOPT_URL => "https://app.midtrans.com/snap/v1/transactions",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -17,8 +17,10 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS => $transaction,
   CURLOPT_HTTPHEADER => array(
     "accept: application/json",
-    "Authorization: Basic U0ItTWlkLXNlcnZlci1aalBGYjlfcFJJMjhpV2EyUFp4Sy12Y286", 
-"cache-control: no-cache",
+//    "Authorization: Basic U0ItTWlkLXNlcnZlci1aalBGYjlfcFJJMjhpV2EyUFp4Sy12Y286",
+
+    "Authorization: Basic TWlkLXNlcnZlci0ybzRRSUk2bTF6U3NPMTFRbEtzQlE4aVE=",
+    "cache-control: no-cache",
     "content-type: application/json"
   ),
 ));
