@@ -53,7 +53,7 @@ class Merchant_model extends CI_Model
     $config['overwrite'] = TRUE;
     $config['file_name']     =  str_replace(' ','_',$filename);
     $config['allowed_types'] = $allowedFile;
-    $this->db->where($where = array($whereVar => $whereVal));
+    //$this->db->where($where = array($whereVar => $whereVal));
     $this->load->library('upload', $config);
     if (!$this->upload->do_upload('fileUpload')) {
       $upload['status']=0;
@@ -135,7 +135,7 @@ class Merchant_model extends CI_Model
   //APPLICATION
   public function cProduct()
   {
-    $data['product'] = $this->getAllData('view_product');
+    $data['product'] = $this->getSomeData('view_product', 'id_merchant', $this->session->userdata['id']);
     $data['deleted'] = $this->getSomeData2('view_product', 'id_merchant', $this->session->userdata['id'], 'status', 0);
     $data['view_name'] = 'product';
     $data['webconf'] = $this->getDataRow('webconf', 'id', 1);
@@ -197,6 +197,16 @@ class Merchant_model extends CI_Model
     $this->db->insert('product', $data);
     $id = $this->db->insert_id();
     $this->db->insert('stock_add', $data = array('id_product' => $this->db->insert_id(), 'stock_add' => $this->input->post('stock')));
+    $data = array (
+      'id_merchant' => $this->session->userdata['id'],
+      'id_product' => $id,
+      'rating' => 0,
+      'qty' => 0,
+      'status' => 5,
+      'id_order' => 0
+
+    );
+    $this->db->insert('detail_order', $data);
     notify('Sukses', 'Proses penambahan berhasil dilakukan, silahkan tambahkan gambar pada kolom gambar', 'success', 'fas fa-plus', 'detailMyProduct/'.$id);
   }
 

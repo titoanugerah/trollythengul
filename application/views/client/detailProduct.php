@@ -87,7 +87,7 @@
 
             <div class="form-group col-md-3">
               <label>Stok</label>
-              <input type="number" class="form-control"  name="stock" value="<?php echo $product->last_stock; ?>" readonly>
+              <input type="number" class="form-control"  name="stock" value="<?php echo (int) $product->last_stock; ?>" readonly>
             </div>
 
 
@@ -174,8 +174,8 @@
           <div class="col-md-9">
             <?php foreach ($comment as $item): ?>
               <div class="card">
-                <div class="card-header">
-                  <?php echo $item->fullname.' pada  '.$item->date_order; ?>
+                <div class="card-header" align="left">
+                  <?php echo $item->display_picture. $item->fullname.' pada  '.$item->date_order; ?>
                 </div>
                 <div class="card-body">
                   <?php echo $item->comment; ?>

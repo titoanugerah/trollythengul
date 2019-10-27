@@ -195,6 +195,18 @@
 				<?php if($this->session->userdata['login']){ $this->load->view($this->session->userdata['role'].'/'.$view_name);}
 				else{$this->load->view('guest/'.$view_name);}?>
 			</div>
+			<div class="panel-header bg-<?php echo $webconf->theme_color ?>-gradient">
+  <div class="page-inner py-5">
+    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row"> 
+      <div>
+        <h2 class="text-white pb-2 fw-bold"><?php echo $webconf->office_name ?></h2>
+        <h5 class="text-white op-7 mb-2"> <?php echo $webconf->office_address ?></h5>
+        <h5 class="text-white op-7 mb-2"> <?php echo $webconf->office_phone_number ?></h5>
+      </div>
+     
+    </div>
+  </div>
+</div>
 			<footer class="footer">
 				<div class="container-fluid">
 					<nav class="pull-left">

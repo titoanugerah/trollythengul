@@ -90,7 +90,7 @@
 
             <div class="form-group col-md-3">
               <label>Stok</label>
-              <input type="number" class="form-control"  name="stock" value="<?php echo $product->last_stock; ?>" readonly>
+              <input type="number" class="form-control"  name="stock" value="<?php echo (int) $product->last_stock; ?>" readonly>
             </div>
 
 

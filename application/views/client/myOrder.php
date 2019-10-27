@@ -132,7 +132,7 @@
               </div>
               <div class="col-8">
                 <?php
-                if($item->status==-2){$status = 'Pesanan ditolak oleh Toko';} elseif($item->status==-1){$status = 'Pembayaran ditolak oleh Admin';} ?>
+                if($item->status==-2){$status = 'Pesanan ditolak oleh Toko, Admin akan segera mengembalikan dana ke rekening anda';} elseif($item->status==-1){$status = 'Pembayaran ditolak oleh Admin, Bukti pembayaran anda tidak valid, Lebih lanjut hubungi admin';} ?>
                 <strong style="color:green;"><?php echo $status; ?></strong>
               </div>
             </div>
